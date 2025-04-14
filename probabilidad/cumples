@@ -1,1 +1,41 @@
+import random
+import matplotlib.pyplot as plt
 
+# 1. Experimento aleatorio: Generar k cumpleaños aleatorios (números del 1 al 365)
+def cumples(k):
+    return [random.randint(1, 365) for _ in range(k)]
+
+# 2. Función que detecta si hay al menos una coincidencia
+def hay_coincidencia(lista):
+    return len(set(lista)) < len(lista)
+
+# 3. Recopilar muestra aleatoria, aproximar la probabilidad de coincidencia para un grupo de k personas ejecutando el experimento N veces.
+def proporcion_coincidencia(k, N=1000):
+    coincidencias = 0
+    for _ in range(N):
+        muestra = cumples(k)
+        if hay_coincidencia(muestra):
+            coincidencias += 1
+    return coincidencias / N
+
+# 4. Estimar para k desde 1 hasta 50
+random.seed(42)  # Defino semilla para que los resultados sean reproducibles
+rango = range(1, 51)
+for k in rango:
+    p = proporcion_coincidencia(k, N=1000)
+    print(f"{k:2d} personas → P(E) ≈ {p:.4f}")
+
+# 5. Mostrar tabla simple
+ks = list(rango)
+probs = [proporcion_coincidencia(k) for k in ks]
+
+x = ks
+y = probs
+plt.plot(x, y)
+plt.plot()
+
+plt.xlabel("Número de personas (k)")
+plt.ylabel("Probabilidad")
+plt.title("Probablilidad de cumpleaños compartido")
+# plt.legend()
+plt.show()
