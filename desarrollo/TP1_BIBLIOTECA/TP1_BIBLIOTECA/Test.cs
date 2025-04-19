@@ -13,7 +13,7 @@ namespace TP1_BIBLIOTECA
             cargarLibros(5);
 
             biblioteca.ListarLibros();
-            biblioteca.EliminarLibro("Libro5");
+            biblioteca.EliminarLibro("Libro6");
             biblioteca.ListarLibros();
 
             void cargarLibros(int cantidad)
