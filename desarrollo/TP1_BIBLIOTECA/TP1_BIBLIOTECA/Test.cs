@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using TP1_BIBLIOTECA.entidad;
 
 namespace TP1_BIBLIOTECA
@@ -8,70 +7,88 @@ namespace TP1_BIBLIOTECA
     {
         static void Main(string[] args)
         {
-            
-
             Biblioteca biblioteca = new Biblioteca();
 
-            // 1. Cargar datos iniciales
+            // ======================================================
+            // 1. CARGA DE DATOS INICIALES
+            // ======================================================
+            Console.WriteLine("\n=== CARGA DE DATOS ===");
             CargarLibrosDeProgramacion();
             CargarLectores();
 
-            // 2. Mostrar estado inicial
-            Console.WriteLine("=== ESTADO INICIAL ===");
-            biblioteca.ListarLibros();
-            biblioteca.ListarLectores();
-            Console.WriteLine();
+            // ======================================================
+            // 2. PRUEBAS CON LECTORES
+            // ======================================================
+            Console.WriteLine("\n=== PRUEBAS CON LECTORES ===");
+            ProbarBuscarLector();
+            ProbarEliminarLector();
 
-            // 3. Pruebas del método prestarLibro()
+            // ======================================================
+            // 3. PRUEBAS CON LIBROS
+            // ======================================================
+            Console.WriteLine("\n=== PRUEBAS CON LIBROS ===");
             ProbarPrestamos();
 
-            // --- Métodos locales ---
+            // ======================================================
+            // MÉTODOS LOCALES
+            // ======================================================
+
             void CargarLibrosDeProgramacion()
             {
-                string[] librosProgramacion = {
-                    "Clean Code", "Design Patterns", "The Pragmatic Programmer",
-                    "Code Complete", "Refactoring", "Head First Design Patterns",
-                    "Domain-Driven Design", "Introduction to Algorithms",
-                    "Structure and Interpretation of Computer Programs",
-                    "The Art of Computer Programming"
-                };
-
-                string[] autores = {
-                    "Robert Martin", "Erich Gamma", "Andrew Hunt",
-                    "Steve McConnell", "Martin Fowler", "Eric Freeman",
-                    "Eric Evans", "Thomas Cormen", "Harold Abelson",
-                    "Donald Knuth"
-                };
-
-                for (int i = 0; i < librosProgramacion.Length; i++)
-                {
-                    bool pude = biblioteca.AgregarLibro(librosProgramacion[i], autores[i], "Editorial Técnica");
-                    if (pude) Console.WriteLine($"Libro '{librosProgramacion[i]}' agregado.");
-                }
-                Console.WriteLine();
+                biblioteca.AgregarLibro("Clean Code", "Robert Martin", "Editorial Técnica");
+                biblioteca.AgregarLibro("Design Patterns", "Erich Gamma", "Editorial Técnica");
+                biblioteca.AgregarLibro("The Pragmatic Programmer", "Andrew Hunt", "Editorial Técnica");
+                biblioteca.AgregarLibro("Code Complete", "Steve McConnell", "Editorial Técnica");
+                biblioteca.AgregarLibro("Refactoring", "Martin Fowler", "Editorial Técnica");
+                biblioteca.AgregarLibro("Head First Design Patterns", "Eric Freeman", "Editorial Técnica");
+                biblioteca.AgregarLibro("Domain-Driven Design", "Eric Evans", "Editorial Técnica");
+                biblioteca.AgregarLibro("Introduction to Algorithms", "Thomas Cormen", "Editorial Técnica");
+                biblioteca.AgregarLibro("Structure and Interpretation of Computer Programs", "Harold Abelson", "Editorial Técnica");
+                biblioteca.AgregarLibro("The Art of Computer Programming", "Donald Knuth", "Editorial Técnica");
+                Console.WriteLine("Libros cargados correctamente.\n");
             }
 
             void CargarLectores()
             {
-                var lectores = new Dictionary<string, int> {
-                    {"Adriana", 33456123},
-                    {"Lucas", 35678234},
-                    {"Marcela", 27345128},
-                    {"Verónica", 40123987},
-                    {"Enrique", 38456219}
-                };
+                biblioteca.AltaLector("Adriana", 33456123);
+                biblioteca.AltaLector("Lucas", 35678234);
+                biblioteca.AltaLector("Marcela", 27345128);
+                biblioteca.AltaLector("Verónica", 40123987);
+                biblioteca.AltaLector("Enrique", 38456219);
+                Console.WriteLine("Lectores cargados correctamente.\n");
+            }
 
-                foreach (var lector in lectores)
-                {
-                    bool pude = biblioteca.AltaLector(lector.Key, lector.Value);
-                    Console.WriteLine(pude ? $"{lector.Key} agregado correctamente." : $"{lector.Key} ya existe.");
-                }
-                Console.WriteLine();
+            void ProbarBuscarLector()
+            {
+                Console.WriteLine("\nBuscando lector con DNI 35678234:");
+                var lector = biblioteca.BuscarLectorPorDni(35678234);
+                if (lector != null)
+                    Console.WriteLine($"Lector encontrado: {lector.Nombre} - DNI: {lector.Dni}");
+                else
+                    Console.WriteLine("Lector no encontrado.");
+
+                Console.WriteLine("\nBuscando lector con DNI inexistente 99999999:");
+                lector = biblioteca.BuscarLectorPorDni(99999999);
+                Console.WriteLine(lector == null ? "Lector no encontrado." : "Error: lector debería no existir.");
+            }
+
+            void ProbarEliminarLector()
+            {
+                Console.WriteLine("\nEliminando lector con DNI 38456219:");
+                bool eliminado = biblioteca.EliminarLector(38456219);
+                Console.WriteLine(eliminado ? "Lector eliminado correctamente." : "No se pudo eliminar el lector.");
+
+                Console.WriteLine("Intentando eliminar al mismo lector nuevamente:");
+                eliminado = biblioteca.EliminarLector(38456219);
+                Console.WriteLine(!eliminado ? "Lector ya no existe." : "Error: no debería poder eliminarse.");
             }
 
             void ProbarPrestamos()
             {
-                Console.WriteLine("=== PRUEBAS DE PRESTARLIBRO() ===");
+                // Mostrar estado inicial
+                Console.WriteLine("\nEstado inicial de la biblioteca:");
+                biblioteca.ListarLibros();
+                biblioteca.ListarLectores();
 
                 // Caso 1: Préstamo exitoso
                 Console.WriteLine("\nCaso 1: Adriana pide 'Clean Code'");
@@ -102,13 +119,8 @@ namespace TP1_BIBLIOTECA
                 Console.WriteLine($"Resultado: {resultado}");
 
                 // Mostrar estado final
-                Console.WriteLine("\n=== ESTADO FINAL ===");
-                Console.WriteLine("Libros restantes en biblioteca:");
+                Console.WriteLine("\nEstado final de la biblioteca:");
                 biblioteca.ListarLibros();
-                
-                
-                
-                
             }
         }
     }
