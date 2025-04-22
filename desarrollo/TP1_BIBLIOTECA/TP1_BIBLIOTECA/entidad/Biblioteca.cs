@@ -159,7 +159,18 @@ namespace TP1_BIBLIOTECA.entidad
             return "PRESTAMO EXITOSO";
         }
         
-        
+        public string devolverLibro(string titulo, int dni)
+        {
+            Lector lector = BuscarLector(dni);
+            if (lector == null) return "LECTOR INEXISTENTE";
+
+            Libro libro = lector.LibrosPrestados.Find(l => l.Titulo.Equals(titulo));
+            if (libro == null) return "LIBRO NO PRESTADO A ESTE LECTOR";
+
+            lector.LibrosPrestados.Remove(libro);
+            Libros.Add(libro);
+            return "DEVOLUCION EXITOSA";
+        }
         
         
     }
