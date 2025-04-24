@@ -69,5 +69,109 @@ namespace TP1_BIBLIOTECA.entidad
 
             return resultado;
         }
+        
+        public bool AltaLector(string nombre, int dni)  // cambio de nombre el PDF pide AltaLector
+        {
+            bool resultado = false;
+
+            Lector lector = BuscarLector(dni);
+
+            if (lector == null)
+            {
+                lector = new Lector(nombre, dni);
+                Lectores.Add(lector);
+                resultado = true;
+            }
+
+            return resultado;
+        }
+        
+        private Lector BuscarLector(int dni)            //auxiliar
+        {
+            Lector lectorBuscado = null;
+
+            int i = 0;
+            while (i < Lectores.Count && Lectores[i].Dni != dni)
+                i++;
+
+            if (i != Lectores.Count)
+                lectorBuscado = Lectores[i];
+
+            return lectorBuscado;
+        }
+        
+        public void ListarLectores()                //
+        {
+            foreach (var lector in Lectores)
+                Console.WriteLine("Nombre: " + lector.Nombre + " - DNI: " + lector.Dni);
+        }
+        
+        public Lector BuscarLectorPorDni(int dni)   //
+        {
+            return Lectores.Find(l => l.Dni == dni);
+        }
+        
+        public List<Lector> BuscarLectoresPorNombre(string nombre)
+        {
+            return Lectores.FindAll(l => l.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
+        }
+        
+        public bool EliminarLector(int dni)
+        {
+            Lector lector = BuscarLector(dni);
+            if (lector != null)
+            {
+                Lectores.Remove(lector);
+                return true;
+            }
+            return false;
+        }
+        
+        
+        
+        public string PrestarLibro(string titulo, int dni)
+        {
+            
+            Libro libro = BuscarLibro(titulo);
+            if (libro == null)
+            {
+                return "LIBRO INEXISTENTE";
+            }
+
+            
+            Lector lector = BuscarLector(dni);
+            if (lector == null)
+            {
+                return "LECTOR INEXISTENTE";
+            }
+
+            
+            if (lector.LibrosPrestados.Count >= 3)
+            {
+                return "TOPE DE PRESTAMO ALCANZADO";
+            }
+
+            
+            Libros.Remove(libro);
+            
+            lector.LibrosPrestados.Add(libro);
+
+            return "PRESTAMO EXITOSO";
+        }
+        
+        public string devolverLibro(string titulo, int dni)
+        {
+            Lector lector = BuscarLector(dni);
+            if (lector == null) return "LECTOR INEXISTENTE";
+
+            Libro libro = lector.LibrosPrestados.Find(l => l.Titulo.Equals(titulo));
+            if (libro == null) return "LIBRO NO PRESTADO A ESTE LECTOR";
+
+            lector.LibrosPrestados.Remove(libro);
+            Libros.Add(libro);
+            return "DEVOLUCION EXITOSA";
+        }
+        
+        
     }
 }
