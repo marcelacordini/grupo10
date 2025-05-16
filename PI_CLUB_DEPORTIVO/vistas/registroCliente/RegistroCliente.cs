@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PI_CLUB_DEPORTIVO.vistas.registroCliente.controles;
 
 namespace PI_CLUB_DEPORTIVO.vistas.registroCliente
 {
@@ -17,16 +18,16 @@ namespace PI_CLUB_DEPORTIVO.vistas.registroCliente
             InitializeComponent();
         }
 
-        
+
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txtNombre.Text = "";
-            txtApellido.Text = "";
-            txtDni.Text = "";
-            txtCorreo.Text = "";
-            txtDomicilio.Text = "";
-            txtTelefono.Text = "";
+            ffNombre.Text = "";
+            ffApellido.Text = "";
+            ffDni.Text = "";
+            ffCorreo.Text = "";
+            ffDomicilio.Text = "";
+            ffTelefono.Text = "";
             optAPFalse.Checked = false;
             optAPTrue.Checked = false;
             optSocio.Checked = false;
@@ -35,38 +36,38 @@ namespace PI_CLUB_DEPORTIVO.vistas.registroCliente
 
         private void BtnRegistrar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtNombre.Text))
+            if (string.IsNullOrEmpty(ffNombre.Text))
             {
-                ErrorMessageBoxRequiered(txtNombre, "Nombre");
+                ErrorMsgRequiered(ffNombre, "Nombre");
                 return;
             }
 
-            if (string.IsNullOrEmpty(txtApellido.Text))
+            if (string.IsNullOrEmpty(ffApellido.Text))
             {
-                ErrorMessageBoxRequiered(txtApellido, "Apellido");
+                ErrorMsgRequiered(ffApellido, "Apellido");
                 return;
             }
 
-            if (string.IsNullOrEmpty(txtDni.Text))
+            if (string.IsNullOrEmpty(ffDni.Text))
             {
-                ErrorMessageBoxRequiered(txtDni, "DNI");
+                ErrorMsgRequiered(ffDni, "DNI");
                 return;
             }
 
-            if(!optAPFalse.Checked && !optAPTrue.Checked)
+            if (!optAPFalse.Checked && !optAPTrue.Checked)
             {
-                ErrorMessageBoxRequiered(optAPTrue, "Apto físico");
+                ErrorMsgRequiered(optAPTrue, "Apto físico");
                 return;
             }
 
-            if(!optSocio.Checked && ! optNoSocio.Checked)
+            if (!optSocio.Checked && !optNoSocio.Checked)
             {
-                ErrorMessageBoxRequiered(optSocio, "Tipo Socio");
+                ErrorMsgRequiered(optSocio, "Tipo Socio");
                 return;
             }
         }
 
-        private void ErrorMessageBoxRequiered(Control control, string field)
+        private void ErrorMsgRequiered(Control control, string field)
         {
             MessageBox.Show($"El campo '{field}' es obligatorio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             control.Focus();
