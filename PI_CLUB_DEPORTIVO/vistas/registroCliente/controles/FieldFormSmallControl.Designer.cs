@@ -1,6 +1,6 @@
 ﻿namespace PI_CLUB_DEPORTIVO.vistas.registroCliente.controles
 {
-    partial class LabelCommon
+    partial class FieldFormSmallControl
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -28,31 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblCommon = new System.Windows.Forms.Label();
+            lblTitle = new Label();
+            txtInput = new TextBox();
             SuspendLayout();
             // 
-            // lblCommon
+            // lblTitle
             // 
-            lblCommon.AutoSize = true;
-            lblCommon.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblCommon.Location = new Point(25, 44);
-            lblCommon.Name = "lblCommon";
-            lblCommon.Size = new Size(70, 28);
-            lblCommon.TabIndex = 0;
-            lblCommon.Text = "label1";
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblTitle.Location = new Point(0, 0);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(70, 28);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "label1";
             // 
-            // Label
+            // txtInput
+            // 
+            txtInput.Location = new Point(0, 31);
+            txtInput.Name = "txtInput";
+            txtInput.Size = new Size(258, 27);
+            txtInput.TabIndex = 1;
+            // 
+            // FieldFormSmall
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(lblCommon);
-            Name = "Label";
+            Controls.Add(txtInput);
+            Controls.Add(lblTitle);
+            Name = "FieldFormSmall";
+            Size = new Size(258, 55);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private System.Windows.Forms.Label lblCommon;
+        private Label lblTitle;
+        private TextBox txtInput;
     }
 }
