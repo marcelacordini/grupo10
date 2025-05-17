@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PI_CLUB_DEPORTIVO.datos;
 using PI_CLUB_DEPORTIVO.entidades;
 using PI_CLUB_DEPORTIVO.util;
 using PI_CLUB_DEPORTIVO.vistas.registroCliente.controles;
@@ -58,7 +59,7 @@ namespace PI_CLUB_DEPORTIVO.vistas.registroCliente
             string correo = ffCorreo.Text.Trim();
             string telefono = ffTelefono.Text.Trim();
             string domicilio = ffDomicilio.Text.Trim();
-            string fechaAlta = DateTime.Today.ToString("yyyy-mm-dd");
+            string fechaAlta = DateTime.Today.ToString("yyyy-MM-dd");
             bool aptoFisico = optAPTrue.Checked;
 
             if (!correo.Contains("@") || !correo.Contains("."))
@@ -67,43 +68,39 @@ namespace PI_CLUB_DEPORTIVO.vistas.registroCliente
                 return;
             }
 
+            Cliente nuevoCliente = new Cliente(
+                nombre,
+                apellido,
+                dni,
+                correo,
+                telefono,
+                domicilio,
+                fechaAlta,
+                aptoFisico
+                );
+
+
             if (optSocio.Checked)
             {
-                Socio nuevoSocio = new Socio(
-                    nombre,
-                    apellido,
-                    dni,
-                    correo,
-                    telefono,
-                    domicilio,
-                    fechaAlta,
-                    aptoFisico,
-                    EstadoSocioConst.ACTIVO,
-                    DateTime.Today.AddDays(30).ToString("yyyy-mm-dd")
-                    );
+                nuevoCliente.TipoCliente = TipoClienteConst.SOCIO;
 
-                MostrarMensajeInfo(nuevoSocio.ToString());
+                //MostrarMensajeInfo(nuevoCliente.ToString());
+                ClienteDao clienteDao = new ClienteDao();
+                string? respuesta = clienteDao.NuevoCliente( nuevoCliente );
                 
-                PopUpConfirmacion.MostrarPopUp("12345", TipoClienteConst.SOCIO);
+                PopUpConfirmacion.MostrarPopUp(respuesta, TipoClienteConst.SOCIO);
                 
                 LimpiarCampos(sender, e);
             }
 
             if (optNoSocio.Checked) {
-                NoSocio nuevoNoSocio = new NoSocio(
-                    nombre,
-                    apellido,
-                    dni,
-                    correo,
-                    telefono,
-                    domicilio,
-                    fechaAlta,
-                    aptoFisico
-                    );
+                nuevoCliente.TipoCliente = TipoClienteConst.NO_SOCIO;
 
-                MostrarMensajeInfo(nuevoNoSocio.ToString());
+                //MostrarMensajeInfo(nuevoCliente.ToString());
+                ClienteDao clienteDao = new ClienteDao();
+                string? respuesta = clienteDao.NuevoCliente(nuevoCliente);
 
-                PopUpConfirmacion.MostrarPopUp("12345", TipoClienteConst.NO_SOCIO);
+                PopUpConfirmacion.MostrarPopUp(respuesta, TipoClienteConst.NO_SOCIO);
 
                 LimpiarCampos(sender, e);
             }

@@ -25,6 +25,18 @@ namespace PI_CLUB_DEPORTIVO.entidades
         {
         }
 
+        public Cliente(string nombre, string apellido, string dni, string correo, string telefono, string domicilio, string fechaAlta, bool aptoFisico)
+        {
+            Nombre = nombre;
+            Apellido = apellido;
+            Dni = dni;
+            Correo = correo;
+            Telefono = telefono;
+            Domicilio = domicilio;
+            FechaAlta = fechaAlta;
+            AptoFisico = aptoFisico;
+        }
+
         public Cliente(string nombre, string apellido, string dni, string correo, string telefono, string domicilio, string fechaAlta, bool aptoFisico, string tipoCliente)
         {
             Nombre = nombre;
