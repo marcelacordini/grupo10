@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PI_CLUB_DEPORTIVO.datos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PI_CLUB_DEPORTIVO.vistas
 {
@@ -61,23 +61,25 @@ namespace PI_CLUB_DEPORTIVO.vistas
             }
         }
 
-        /*private void btnIngresar_Click(object sender, EventArgs e)
+        private void btnIngresar_Click(object sender, EventArgs e)
         {
-            DataTable tablaLogin = new DataTable(); // es la que recibe los
-            datos desde el formulario
-            Datos.Usuarios dato = new Datos.Usuarios(); // variable que
-            contiene todas las caracteristicas de la clase
-            tablaLogin = dato.Log_Usu(txtUsuario.Text, txtPass.Text);
-            if (tablaLogin.Rows.Count > 0)
+            Usuario datosUsuario = new Usuario();
+            DataTable resultado = datosUsuario.Log_Usu(txtUsuario.Text.Trim(), txtPass.Text.Trim());
+
+            if (resultado.Rows.Count > 0)
             {
-                // quiere decir que el resultado tiene 1 fila por lo que el
-                usuario EXISTE
-            MessageBox.Show("Ingreso exitoso");
+                MessageBox.Show("Bienvenido " + resultado.Rows[0]["nombre"].ToString());
+                // Acá podés abrir el formulario principal
             }
             else
             {
-                MessageBox.Show("Usuario y/o password incorrecto");
+                MessageBox.Show("Usuario o contraseña incorrectos");
             }
-        }*/
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

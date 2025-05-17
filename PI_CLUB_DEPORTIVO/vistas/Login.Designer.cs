@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
-            btnIngresar_Click = new Button();
+            btnIngresar = new Button();
             label1 = new Label();
             txtUsuario = new TextBox();
             txtPass = new TextBox();
@@ -37,14 +37,15 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // btnIngresar_Click
+            // btnIngresar
             // 
-            btnIngresar_Click.Location = new Point(414, 289);
-            btnIngresar_Click.Name = "btnIngresar_Click";
-            btnIngresar_Click.Size = new Size(234, 62);
-            btnIngresar_Click.TabIndex = 0;
-            btnIngresar_Click.Text = "Ingresar";
-            btnIngresar_Click.UseVisualStyleBackColor = true;
+            btnIngresar.Location = new Point(414, 289);
+            btnIngresar.Name = "btnIngresar";
+            btnIngresar.Size = new Size(234, 62);
+            btnIngresar.TabIndex = 0;
+            btnIngresar.Text = "Ingresar";
+            btnIngresar.UseVisualStyleBackColor = true;
+            btnIngresar.Click += btnIngresar_Click;
             // 
             // label1
             // 
@@ -96,9 +97,10 @@
             Controls.Add(txtPass);
             Controls.Add(txtUsuario);
             Controls.Add(label1);
-            Controls.Add(btnIngresar_Click);
+            Controls.Add(btnIngresar);
             Name = "Login";
             Text = "Login";
+            Load += Login_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -106,7 +108,7 @@
 
         #endregion
 
-        private Button btnIngresar_Click;
+        private Button btnIngresar;
         private Label label1;
         private TextBox txtUsuario;
         private TextBox txtPass;
