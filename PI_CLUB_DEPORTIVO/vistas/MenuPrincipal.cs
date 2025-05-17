@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PI_CLUB_DEPORTIVO.vistas.registroCliente;
 
 namespace PI_CLUB_DEPORTIVO.vistas
 {
@@ -31,6 +32,10 @@ namespace PI_CLUB_DEPORTIVO.vistas
         private void btnRegistrarCliente_Click(object sender, EventArgs e)
         {
             MessageBox.Show("VENTANA DE REGISTRO", "Info", MessageBoxButtons.OK);
+
+            RegistroCliente registroClienteForm = new RegistroCliente();
+
+            registroClienteForm.Show();
         }
 
         private void btnPagarCuotaoActividad_Click(object sender, EventArgs e)

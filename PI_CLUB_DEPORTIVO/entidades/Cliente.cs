@@ -38,7 +38,7 @@ namespace PI_CLUB_DEPORTIVO.entidades
             TipoCliente = tipoCliente;
         }
 
-        public int Id { get => id; set => id = value; }
+        public int Id { get => idCliente; set => idCliente = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public string Apellido { get => apellido; set => apellido = value; }
         public string Dni { get => dni; set => dni = value; }
