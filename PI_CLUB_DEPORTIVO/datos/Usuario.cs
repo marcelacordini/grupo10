@@ -19,14 +19,14 @@ namespace PI_CLUB_DEPORTIVO.datos
 
             try
             {
-                sqlCon = Conexion.getInstancia().CrearConcexion();
+                sqlCon = Conexion.getInstancia().CrearConexion();
                 MySqlCommand comando = new MySqlCommand("IngresoLogin", sqlCon);
                 comando.CommandType = CommandType.StoredProcedure;
 
-                // Parametros que espera el procedure
                 comando.Parameters.Add("Usu", MySqlDbType.VarChar).Value = L_Usu;
                 comando.Parameters.Add("Pass", MySqlDbType.VarChar).Value = P_Usu;
 
+                // Abrimos la conexión
                 sqlCon.Open();
                 resultado = comando.ExecuteReader();
                 tabla.Load(resultado);
