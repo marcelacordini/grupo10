@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblAptoFisico = new Label();
             optAPTrue = new RadioButton();
             optAPFalse = new RadioButton();
-            lblTipoCliente = new Label();
             optSocio = new RadioButton();
             optNoSocio = new RadioButton();
             btnRegistrar = new Button();
@@ -43,23 +41,19 @@
             ffCorreo = new PI_CLUB_DEPORTIVO.vistas.registroCliente.controles.FieldFormControl();
             ffDni = new PI_CLUB_DEPORTIVO.vistas.registroCliente.controles.FieldFormSmallControl();
             ffTelefono = new PI_CLUB_DEPORTIVO.vistas.registroCliente.controles.FieldFormSmallControl();
+            gbAptoFisico = new GroupBox();
+            gbTipoCliente = new GroupBox();
+            gbAptoFisico.SuspendLayout();
+            gbTipoCliente.SuspendLayout();
             SuspendLayout();
-            // 
-            // lblAptoFisico
-            // 
-            lblAptoFisico.AutoSize = true;
-            lblAptoFisico.Location = new Point(59, 458);
-            lblAptoFisico.Name = "lblAptoFisico";
-            lblAptoFisico.Size = new Size(81, 20);
-            lblAptoFisico.TabIndex = 0;
-            lblAptoFisico.Text = "Apto físico";
             // 
             // optAPTrue
             // 
             optAPTrue.AutoSize = true;
-            optAPTrue.Location = new Point(59, 481);
+            optAPTrue.Font = new Font("Segoe UI", 10F);
+            optAPTrue.Location = new Point(21, 36);
             optAPTrue.Name = "optAPTrue";
-            optAPTrue.Size = new Size(104, 24);
+            optAPTrue.Size = new Size(117, 27);
             optAPTrue.TabIndex = 7;
             optAPTrue.TabStop = true;
             optAPTrue.Text = "Presentado";
@@ -68,29 +62,22 @@
             // optAPFalse
             // 
             optAPFalse.AutoSize = true;
-            optAPFalse.Location = new Point(169, 481);
+            optAPFalse.Font = new Font("Segoe UI", 10F);
+            optAPFalse.Location = new Point(21, 71);
             optAPFalse.Name = "optAPFalse";
-            optAPFalse.Size = new Size(129, 24);
+            optAPFalse.Size = new Size(145, 27);
             optAPFalse.TabIndex = 8;
             optAPFalse.TabStop = true;
             optAPFalse.Text = "No presentado";
             optAPFalse.UseVisualStyleBackColor = true;
             // 
-            // lblTipoCliente
-            // 
-            lblTipoCliente.AutoSize = true;
-            lblTipoCliente.Location = new Point(325, 458);
-            lblTipoCliente.Name = "lblTipoCliente";
-            lblTipoCliente.Size = new Size(108, 20);
-            lblTipoCliente.TabIndex = 0;
-            lblTipoCliente.Text = "Tipo de cliente";
-            // 
             // optSocio
             // 
             optSocio.AutoSize = true;
-            optSocio.Location = new Point(325, 481);
+            optSocio.Font = new Font("Segoe UI", 10F);
+            optSocio.Location = new Point(44, 36);
             optSocio.Name = "optSocio";
-            optSocio.Size = new Size(67, 24);
+            optSocio.Size = new Size(72, 27);
             optSocio.TabIndex = 9;
             optSocio.TabStop = true;
             optSocio.Text = "Socio";
@@ -99,9 +86,10 @@
             // optNoSocio
             // 
             optNoSocio.AutoSize = true;
-            optNoSocio.Location = new Point(435, 481);
+            optNoSocio.Font = new Font("Segoe UI", 10F);
+            optNoSocio.Location = new Point(44, 68);
             optNoSocio.Name = "optNoSocio";
-            optNoSocio.Size = new Size(89, 24);
+            optNoSocio.Size = new Size(98, 27);
             optNoSocio.TabIndex = 10;
             optNoSocio.TabStop = true;
             optNoSocio.Text = "No socio";
@@ -125,7 +113,7 @@
             btnLimpiar.TabIndex = 12;
             btnLimpiar.Text = "LIMPIAR";
             btnLimpiar.UseVisualStyleBackColor = true;
-            btnLimpiar.Click += btnLimpiar_Click;
+            btnLimpiar.Click += LimpiarCampos;
             // 
             // btnVolver
             // 
@@ -173,24 +161,49 @@
             ffDni.Location = new Point(57, 190);
             ffDni.Name = "ffDni";
             ffDni.Size = new Size(258, 72);
-            ffDni.TabIndex = 14;
+            ffDni.TabIndex = 3;
             ffDni.Title = "DNI";
-            ffDni.KeyPress += onlyNumberKey;
+            ffDni.KeyPress += OnlyNumberKey;
             // 
             // ffTelefono
             // 
             ffTelefono.Location = new Point(325, 190);
             ffTelefono.Name = "ffTelefono";
             ffTelefono.Size = new Size(258, 72);
-            ffTelefono.TabIndex = 15;
+            ffTelefono.TabIndex = 4;
             ffTelefono.Title = "Teléfono";
-            ffTelefono.KeyPress += onlyNumberKey;
+            ffTelefono.KeyPress += OnlyNumberKey;
+            // 
+            // gbAptoFisico
+            // 
+            gbAptoFisico.Controls.Add(optAPTrue);
+            gbAptoFisico.Controls.Add(optAPFalse);
+            gbAptoFisico.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            gbAptoFisico.Location = new Point(57, 424);
+            gbAptoFisico.Name = "gbAptoFisico";
+            gbAptoFisico.Size = new Size(250, 125);
+            gbAptoFisico.TabIndex = 16;
+            gbAptoFisico.TabStop = false;
+            gbAptoFisico.Text = "Apto Físico";
+            // 
+            // gbTipoCliente
+            // 
+            gbTipoCliente.Controls.Add(optNoSocio);
+            gbTipoCliente.Controls.Add(optSocio);
+            gbTipoCliente.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            gbTipoCliente.Location = new Point(333, 424);
+            gbTipoCliente.Name = "gbTipoCliente";
+            gbTipoCliente.Size = new Size(250, 125);
+            gbTipoCliente.TabIndex = 17;
+            gbTipoCliente.TabStop = false;
+            gbTipoCliente.Text = "Tipo de cliente";
             // 
             // RegistroCliente
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 576);
+            Controls.Add(gbTipoCliente);
             Controls.Add(ffTelefono);
             Controls.Add(ffDni);
             Controls.Add(ffCorreo);
@@ -198,25 +211,21 @@
             Controls.Add(btnVolver);
             Controls.Add(btnLimpiar);
             Controls.Add(btnRegistrar);
-            Controls.Add(optNoSocio);
-            Controls.Add(optAPFalse);
-            Controls.Add(optSocio);
-            Controls.Add(optAPTrue);
-            Controls.Add(lblTipoCliente);
-            Controls.Add(lblAptoFisico);
             Controls.Add(ffApellido);
             Controls.Add(ffNombre);
+            Controls.Add(gbAptoFisico);
             Name = "RegistroCliente";
             Text = "REGISTRO CLIENTE";
+            gbAptoFisico.ResumeLayout(false);
+            gbAptoFisico.PerformLayout();
+            gbTipoCliente.ResumeLayout(false);
+            gbTipoCliente.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-        private Label lblAptoFisico;
         private RadioButton optAPTrue;
         private RadioButton optAPFalse;
-        private Label lblTipoCliente;
         private RadioButton optSocio;
         private RadioButton optNoSocio;
         private Button btnRegistrar;
@@ -228,5 +237,7 @@
         private controles.FieldFormControl ffCorreo;
         private controles.FieldFormSmallControl ffDni;
         private controles.FieldFormSmallControl ffTelefono;
+        private GroupBox gbAptoFisico;
+        private GroupBox gbTipoCliente;
     }
 }
