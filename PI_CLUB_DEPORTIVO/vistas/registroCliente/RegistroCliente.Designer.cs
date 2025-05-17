@@ -123,6 +123,7 @@
             btnVolver.TabIndex = 13;
             btnVolver.Text = "VOLVER";
             btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.Click += btnVolver_Click;
             // 
             // ffNombre
             // 

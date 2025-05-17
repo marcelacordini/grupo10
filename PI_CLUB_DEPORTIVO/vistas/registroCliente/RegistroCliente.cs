@@ -23,31 +23,31 @@ namespace PI_CLUB_DEPORTIVO.vistas.registroCliente
 
         private void BtnRegistrar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(ffNombre.Text)) 
+            if (string.IsNullOrEmpty(ffNombre.Text))
             {
                 ErrorMsgRequiered(ffNombre, "Nombre");
                 return;
             }
 
-            if (string.IsNullOrEmpty(ffApellido.Text)) 
+            if (string.IsNullOrEmpty(ffApellido.Text))
             {
                 ErrorMsgRequiered(ffApellido, "Apellido");
                 return;
             }
 
-            if (string.IsNullOrEmpty(ffDni.Text)) 
+            if (string.IsNullOrEmpty(ffDni.Text))
             {
                 ErrorMsgRequiered(ffDni, "DNI");
                 return;
             }
 
-            if (!optAPFalse.Checked && !optAPTrue.Checked) 
+            if (!optAPFalse.Checked && !optAPTrue.Checked)
             {
                 ErrorMsgRequiered(optAPTrue, "Apto físico");
                 return;
             }
 
-            if (!optSocio.Checked && !optNoSocio.Checked) 
+            if (!optSocio.Checked && !optNoSocio.Checked)
             {
                 ErrorMsgRequiered(gbTipoCliente, "Tipo de cliente");
                 return;
@@ -86,14 +86,15 @@ namespace PI_CLUB_DEPORTIVO.vistas.registroCliente
 
                 //MostrarMensajeInfo(nuevoCliente.ToString());
                 ClienteDao clienteDao = new ClienteDao();
-                string? respuesta = clienteDao.NuevoCliente( nuevoCliente );
-                
+                string? respuesta = clienteDao.NuevoCliente(nuevoCliente);
+
                 PopUpConfirmacion.MostrarPopUp(respuesta, TipoClienteConst.SOCIO);
-                
+
                 LimpiarCampos(sender, e);
             }
 
-            if (optNoSocio.Checked) {
+            if (optNoSocio.Checked)
+            {
                 nuevoCliente.TipoCliente = TipoClienteConst.NO_SOCIO;
 
                 //MostrarMensajeInfo(nuevoCliente.ToString());
@@ -143,6 +144,13 @@ namespace PI_CLUB_DEPORTIVO.vistas.registroCliente
             optAPTrue.Checked = false;
             optSocio.Checked = false;
             optNoSocio.Checked = false;
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            MenuPrincipal principal = new MenuPrincipal();
+            principal.Show();
+            this.Hide();
         }
     }
 }
