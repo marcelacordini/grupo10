@@ -79,3 +79,36 @@ INSERT INTO cuota (cliente_id, fechaVencimiento, fechaPago, monto, formaPago, pr
 (7, '2025-06-30', '2025-06-28', 1750.25, 'efectivo', 1, 'pagada'),
 (8, '2025-07-05', NULL, 2500.00, 'tarjeta', 2, NULL);
 
+
+-- store procedure, Clic en el botón “+” (Create New SQL Tab) o File > New Query Tab. Pegar el código completo ahí:
+
+
+delimiter //
+
+create procedure IngresoLogin(in Usu varchar(100), in Pass varchar(100))
+
+begin
+  
+
+  select id, nombre 
+  from usuario 
+  where nombre = Usu and clave = Pass;
+
+end
+//
+
+-- TE TIENE QUE TRAER A EMMA
+call IngresoLogin('Emma', '12345')//
+
+
+
+
+
+
+
+
+
+
+
+
+
