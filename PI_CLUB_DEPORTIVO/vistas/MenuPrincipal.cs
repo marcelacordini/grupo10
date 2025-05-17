@@ -25,6 +25,7 @@ namespace PI_CLUB_DEPORTIVO.vistas
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
             this.Close();
+            Application.Exit();
         }
 
         private void btnRegistrarCliente_Click(object sender, EventArgs e)
