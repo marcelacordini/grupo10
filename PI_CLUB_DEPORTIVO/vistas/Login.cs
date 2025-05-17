@@ -68,8 +68,13 @@ namespace PI_CLUB_DEPORTIVO.vistas
 
             if (resultado.Rows.Count > 0)
             {
+                this.Hide();
+                
                 MessageBox.Show("Bienvenido " + resultado.Rows[0]["nombre"].ToString());
-                // Acá podés abrir el formulario principal
+                
+                MenuPrincipal menu = new MenuPrincipal();
+
+                menu.Show();
             }
             else
             {
