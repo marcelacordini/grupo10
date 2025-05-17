@@ -101,7 +101,59 @@ end
 call IngresoLogin('Emma', '12345')//
 
 
+-- STORE PROCEDURE PARA EL REGISTRO DE cliente
+CREATE PROCEDURE proyecto.NuevoCliente(in Nom varchar(100),
+	in Ape varchar(100),
+	in Doc DECIMAL(8, 0),
+	IN Cor VARCHAR(100),
+	IN Tel VARCHAR(100),
+	IN Dom VARCHAR(200),
+	IN FAlta DATE,
+	IN AFis BOOLEAN,
+	in Tip varchar(8),
+	out rta int)
+BEGIN
+	declare filas int default 0;
+	declare existe int default 0;
+    
+     set filas = (select count(*) from cliente);
+     if filas = 0 then
+		set filas = 452; /* consideramos a este numero como el primer numero de cliente */
+     else
+     /* -------------------------------------------------------------------------------
+		buscamos el ultimo numero de cliente almacenado para sumarle una unidad y
+		considerarla como PRIMARY KEY de la tabla
+   ___________________________________________________________________________ */
+		set filas = (select max(id) + 1 from cliente);
+		
+		/* ---------------------------------------------------------
+			para saber si ya esta almacenado el cliente
+		------------------------------------------------------- */	
+		set existe = (select count(*) from cliente where dni = Doc);
+     end if;
+	 
+	  if existe = 0 then	 
+		 insert into cliente values(filas,Nom,Ape,Doc,Cor,Tel,Dom,FAlta,AFis,Tip);
+	  
+	  		IF Tip = 'socio' THEN
+	  			INSERT INTO socio (cliente_id, fechaVencimiento, estado) values(filas, DATE_ADD(CURDATE(), INTERVAL 30 DAY), 'activo');
+	  		END IF;
+	  		
+	  		COMMIT;
+	  
+		 set rta  = filas;
+	  else
+		 set rta = existe;
+      end if;
+END
 
+-- LLAMADO AL STORE ANTERIOR
+
+SET @x = 0;
+
+CALL NuevoCliente('Sofía', 'Fernández', 38741250, 'sofia.fernandez@suemail.com', '381-8888-9012', 'Barrio Nuevo 321, Tucumán', CURDATE(), TRUE, 'socio', @x);
+
+SELECT @x AS respuesta;
 
 
 

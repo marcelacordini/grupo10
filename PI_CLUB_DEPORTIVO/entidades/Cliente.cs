@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-     
 using PI_CLUB_DEPORTIVO.util;
 
 namespace PI_CLUB_DEPORTIVO.entidades
@@ -20,6 +19,7 @@ namespace PI_CLUB_DEPORTIVO.entidades
         private string fechaAlta;
         private bool aptoFisico;
         private string tipoCliente;
+	
 
         public Cliente()
         {
