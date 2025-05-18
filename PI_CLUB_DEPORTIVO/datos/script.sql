@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS Proyecto;
+
 CREATE DATABASE Proyecto;
 USE Proyecto;
 
@@ -102,6 +104,7 @@ call IngresoLogin('Emma', '12345')//
 
 
 -- STORE PROCEDURE PARA EL REGISTRO DE cliente
+delimiter //
 CREATE PROCEDURE proyecto.NuevoCliente(in Nom varchar(100),
 	in Ape varchar(100),
 	in Doc DECIMAL(8, 0),
@@ -146,7 +149,7 @@ BEGIN
 		 set rta = existe;
       end if;
 END
-
+//
 -- LLAMADO AL STORE ANTERIOR
 
 SET @x = 0;
