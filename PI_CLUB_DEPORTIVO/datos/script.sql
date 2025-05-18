@@ -70,20 +70,23 @@ CREATE TABLE cuota (
 
 
 INSERT INTO cuota (cliente_id, fechaVencimiento, fechaPago, monto, formaPago, promocion, estado) VALUES
+-- Cuotas pagadas antes del vencimiento
 (1, DATE_ADD(CURDATE(), INTERVAL 5 DAY), DATE_ADD(CURDATE(), INTERVAL 5 DAY), 1500.00, 'efectivo', 1, 'pagada'),
 (2, '2025-06-20', '2025-06-19', 2200.50, 'tarjeta', 2, 'pagada'),
-(3, '2025-06-10', NULL, 1800.00, 'efectivo', 1, 'vencida'),
-(1, '2025-07-15', NULL, 1500.00, 'tarjeta', 1, NULL),
 (4, '2025-06-25', '2025-06-23', 950.75, 'efectivo', 1, 'pagada'),
-(5, '2025-07-01', NULL, 3000.00, 'tarjeta', 3, NULL),
 (2, '2025-07-20', '2025-07-18', 2200.50, 'efectivo', 1, 'pagada'),
-(6, '2025-06-05', NULL, 1250.00, 'tarjeta', 1, 'vencida'),
 (7, '2025-06-30', '2025-06-28', 1750.25, 'efectivo', 1, 'pagada'),
-(8, '2025-07-05', NULL, 2500.00, 'tarjeta', 2, NULL);
+-- Cuotas pagadas el mismo día del vencimiento
+(3, '2025-06-10', '2025-06-10', 1800.00, 'efectivo', 1, 'pagada'),
+(6, '2025-06-05', '2025-06-05', 1250.00, 'tarjeta', 1, 'pagada'),
+-- Cuotas pagadas después del vencimiento (con recargo)
+(1, '2025-07-15', '2025-07-16', 1500.00, 'tarjeta', 1, 'pagada'),
+(5, '2025-07-01', '2025-07-03', 3000.00, 'tarjeta', 3, 'pagada'),
+(8, '2025-07-05', '2025-07-06', 2500.00, 'tarjeta', 2, 'pagada');
 
 
--- store procedure, Clic en el botón “+” (Create New SQL Tab) o File > New Query Tab. Pegar el código completo ahí:
 
+-- store procedure: INGRESO LOGIN
 
 delimiter //
 
@@ -103,7 +106,7 @@ end
 call IngresoLogin('Emma', '12345')//
 
 
--- STORE PROCEDURE PARA EL REGISTRO DE cliente
+-- STORE PROCEDURE PARA EL REGISTRO DE CLIENTE
 delimiter //
 CREATE PROCEDURE proyecto.NuevoCliente(in Nom varchar(100),
 	in Ape varchar(100),
@@ -157,11 +160,6 @@ SET @x = 0;
 CALL NuevoCliente('Sofía', 'Fernández', 38741250, 'sofia.fernandez@suemail.com', '381-8888-9012', 'Barrio Nuevo 321, Tucumán', CURDATE(), TRUE, 'socio', @x);
 
 SELECT @x AS respuesta;
-
-
-
-
-
 
 
 
