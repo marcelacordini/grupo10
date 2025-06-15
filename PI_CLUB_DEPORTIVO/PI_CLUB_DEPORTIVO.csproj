@@ -9,6 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\fonts\MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="assets\fonts\MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MySql.Data" Version="9.3.0" />
   </ItemGroup>
 
@@ -28,7 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="assets\" />
     <Folder Include="entidades\" />
   </ItemGroup>
 

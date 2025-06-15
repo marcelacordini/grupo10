@@ -39,9 +39,9 @@
             // 
             // btnIngresar
             // 
-            btnIngresar.Location = new Point(414, 289);
+            btnIngresar.Location = new Point(378, 243);
             btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(234, 62);
+            btnIngresar.Size = new Size(266, 53);
             btnIngresar.TabIndex = 0;
             btnIngresar.Text = "Ingresar";
             btnIngresar.UseVisualStyleBackColor = true;
@@ -51,17 +51,17 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(344, 83);
+            label1.Location = new Point(378, 70);
             label1.Name = "label1";
-            label1.Size = new Size(64, 28);
+            label1.Size = new Size(146, 21);
             label1.TabIndex = 1;
-            label1.Text = "Login";
+            label1.Text = "INICIO DE SESIÓN";
             // 
             // txtUsuario
             // 
-            txtUsuario.Location = new Point(344, 159);
+            txtUsuario.Location = new Point(378, 132);
             txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(304, 27);
+            txtUsuario.Size = new Size(266, 25);
             txtUsuario.TabIndex = 2;
             txtUsuario.Text = "Usuario";
             txtUsuario.Enter += txtUsuario_Enter;
@@ -69,9 +69,9 @@
             // 
             // txtPass
             // 
-            txtPass.Location = new Point(344, 214);
+            txtPass.Location = new Point(378, 179);
             txtPass.Name = "txtPass";
-            txtPass.Size = new Size(304, 27);
+            txtPass.Size = new Size(266, 25);
             txtPass.TabIndex = 3;
             txtPass.Text = "Contraseña";
             txtPass.TextChanged += textBox1_TextChanged;
@@ -81,26 +81,31 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(81, 83);
+            pictureBox1.Location = new Point(12, 43);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(183, 198);
+            pictureBox1.Size = new Size(331, 327);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 4;
+            pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(pictureBox1);
+            ClientSize = new Size(700, 382);
             Controls.Add(txtPass);
             Controls.Add(txtUsuario);
             Controls.Add(label1);
             Controls.Add(btnIngresar);
+            Controls.Add(pictureBox1);
             Name = "Login";
             Text = "Login";
             Load += Login_Load;
+            Controls.SetChildIndex(pictureBox1, 0);
+            Controls.SetChildIndex(btnIngresar, 0);
+            Controls.SetChildIndex(label1, 0);
+            Controls.SetChildIndex(txtUsuario, 0);
+            Controls.SetChildIndex(txtPass, 0);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -112,6 +117,7 @@
         private Label label1;
         private TextBox txtUsuario;
         private TextBox txtPass;
+        //private PictureBox pictureBox1;
         private PictureBox pictureBox1;
     }
 }

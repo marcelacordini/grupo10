@@ -10,11 +10,12 @@ using System.Windows.Forms;
 using PI_CLUB_DEPORTIVO.datos;
 using PI_CLUB_DEPORTIVO.entidades;
 using PI_CLUB_DEPORTIVO.util;
+using PI_CLUB_DEPORTIVO.vistas.baseForm;
 using PI_CLUB_DEPORTIVO.vistas.registroCliente.controles;
 
 namespace PI_CLUB_DEPORTIVO.vistas.registroCliente
 {
-    public partial class RegistroCliente : Form
+    public partial class RegistroCliente : BaseForm
     {
         public RegistroCliente()
         {

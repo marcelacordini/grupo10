@@ -1,4 +1,5 @@
 ﻿using PI_CLUB_DEPORTIVO.datos;
+using PI_CLUB_DEPORTIVO.vistas.baseForm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 
 namespace PI_CLUB_DEPORTIVO.vistas
 {
-    public partial class Login : Form
+    public partial class Login : BaseForm
     {
         public Login()
         {
@@ -84,7 +85,7 @@ namespace PI_CLUB_DEPORTIVO.vistas
 
         private void Login_Load(object sender, EventArgs e)
         {
-
+            EstiloTitulo(label1);
         }
     }
 }

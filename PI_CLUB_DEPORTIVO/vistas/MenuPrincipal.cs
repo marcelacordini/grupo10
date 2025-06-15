@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PI_CLUB_DEPORTIVO.vistas.baseForm;
 using PI_CLUB_DEPORTIVO.vistas.registroCliente;
 
 namespace PI_CLUB_DEPORTIVO.vistas
 {
-    public partial class MenuPrincipal : Form
+    public partial class MenuPrincipal : BaseForm
     {
         public MenuPrincipal()
         {
