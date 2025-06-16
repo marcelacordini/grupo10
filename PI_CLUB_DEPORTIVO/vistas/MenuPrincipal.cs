@@ -21,13 +21,19 @@ namespace PI_CLUB_DEPORTIVO.vistas
 
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
-
+            EstiloTitulo(lblTitle);
+            EstiloBotonPrincipal(btnPagarCuotaoActividad);
+            EstiloBotonPrincipal(btnRegistrarCliente);
+            EstiloBotonPrincipal(btnSociosConCuotaVencida);
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-            this.Close();
-            Application.Exit();
+            Login login = new Login();
+            
+            login.Show();
+
+            this.Hide();
         }
 
         private void btnRegistrarCliente_Click(object sender, EventArgs e)

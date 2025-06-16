@@ -38,6 +38,7 @@ namespace PI_CLUB_DEPORTIVO.vistas.registroCliente.controles
         public FieldFormControl()
         {
             InitializeComponent();
+            lblCommon.ForeColor = Color.White;
         }
     }
 }

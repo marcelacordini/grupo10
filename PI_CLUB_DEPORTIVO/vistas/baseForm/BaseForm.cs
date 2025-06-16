@@ -14,7 +14,7 @@ namespace PI_CLUB_DEPORTIVO.vistas.baseForm
 {
     public partial class BaseForm : Form
     {
-        protected Font tituloFont = new Font("Segoe UI", 12, FontStyle.Bold);
+        protected Font tituloFont = new Font("Segoe UI", 14, FontStyle.Bold);
 
         public BaseForm()
         {
@@ -72,6 +72,11 @@ namespace PI_CLUB_DEPORTIVO.vistas.baseForm
             elementoTitulo.Font = this.tituloFont;
             elementoTitulo.ForeColor = config.PaletaColores.AcentoPrincipal;
             elementoTitulo.Text = elementoTitulo.Text.ToUpper();
+        }
+        
+        public void EstiloBotonPrincipal(Control boton)
+        {
+            boton.Padding = new Padding(10);
         }
     }
 }

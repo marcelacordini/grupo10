@@ -15,6 +15,8 @@ namespace PI_CLUB_DEPORTIVO.config
         public static readonly Color Detalle = ColorTranslator.FromHtml("#3BA0D4");
         public static readonly Color FondoContenido = ColorTranslator.FromHtml("#F5F5F5");
         public static readonly Color TextoClaro = Color.White;
+        public static readonly Color FondoBoton = ColorTranslator.FromHtml("#fdfdfd");
+        public static readonly Color FondoHoverBoton = ColorTranslator.FromHtml("#e0eef9");
 
     }
 }

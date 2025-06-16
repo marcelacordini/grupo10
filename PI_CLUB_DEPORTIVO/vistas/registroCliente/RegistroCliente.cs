@@ -20,6 +20,10 @@ namespace PI_CLUB_DEPORTIVO.vistas.registroCliente
         public RegistroCliente()
         {
             InitializeComponent();
+            EstiloTitulo(lblTitleForm);
+            LoadIcon(iconRegistrar, "\ue1d3");
+            LoadIcon(iconLimpiar, "\ue28d");
+            LoadIcon(iconVolver, "\ue2ea");
         }
 
         private void BtnRegistrar_Click(object sender, EventArgs e)
