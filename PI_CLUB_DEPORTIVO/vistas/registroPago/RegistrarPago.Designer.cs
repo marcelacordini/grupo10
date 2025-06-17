@@ -31,8 +31,6 @@
             btnBuscar = new Button();
             btnLimpiarBuscar = new Button();
             lblCliente = new Label();
-            txtFecha = new TextBox();
-            txtVencimiento = new TextBox();
             txtMonto = new TextBox();
             cmbFormaPago = new ComboBox();
             cmbPromocion = new ComboBox();
@@ -46,6 +44,8 @@
             lblForma = new Label();
             lblPromocion = new Label();
             lblClienteResultado = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            dateTimePicker2 = new DateTimePicker();
             SuspendLayout();
             // 
             // txtClienteID
@@ -85,20 +85,6 @@
             lblCliente.TabIndex = 5;
             lblCliente.Text = "Cliente ID";
             // 
-            // txtFecha
-            // 
-            txtFecha.Location = new Point(172, 239);
-            txtFecha.Name = "txtFecha";
-            txtFecha.Size = new Size(188, 30);
-            txtFecha.TabIndex = 6;
-            // 
-            // txtVencimiento
-            // 
-            txtVencimiento.Location = new Point(685, 239);
-            txtVencimiento.Name = "txtVencimiento";
-            txtVencimiento.Size = new Size(213, 30);
-            txtVencimiento.TabIndex = 7;
-            // 
             // txtMonto
             // 
             txtMonto.Location = new Point(685, 312);
@@ -114,11 +100,13 @@
             cmbFormaPago.Name = "cmbFormaPago";
             cmbFormaPago.Size = new Size(190, 31);
             cmbFormaPago.TabIndex = 9;
+            cmbFormaPago.SelectedIndexChanged += cmbFormaPago_SelectedIndexChanged;
             // 
             // cmbPromocion
             // 
+            cmbPromocion.AutoCompleteCustomSource.AddRange(new string[] { "1", "3", "6" });
             cmbPromocion.FormattingEnabled = true;
-            cmbPromocion.Items.AddRange(new object[] { "3", "6" });
+            cmbPromocion.Items.AddRange(new object[] { "1", "3", "6" });
             cmbPromocion.Location = new Point(685, 388);
             cmbPromocion.Name = "cmbPromocion";
             cmbPromocion.Size = new Size(213, 31);
@@ -132,6 +120,7 @@
             btnRegistrar.TabIndex = 11;
             btnRegistrar.Text = "REGISTRAR PAGO";
             btnRegistrar.UseVisualStyleBackColor = true;
+            btnRegistrar.Click += btnRegistrar_Click_1;
             // 
             // btnLimpiar
             // 
@@ -177,11 +166,12 @@
             // 
             cmbActividad.AutoCompleteCustomSource.AddRange(new string[] { "Zumba", "Yoga", "Crossfit", "Funcional", "Pilates", "Spinning", "Boxeo" });
             cmbActividad.FormattingEnabled = true;
-            cmbActividad.Items.AddRange(new object[] { "Tarjeta", "Efectivo" });
+            cmbActividad.Items.AddRange(new object[] { "Zumba", "Yoga", "Crossfit", "Funcional", "Pilates", "Spinning", "Boxeo" });
             cmbActividad.Location = new Point(172, 319);
             cmbActividad.Name = "cmbActividad";
             cmbActividad.Size = new Size(190, 31);
             cmbActividad.TabIndex = 16;
+            cmbActividad.SelectedValueChanged += cmbActividad_SelectedValueChanged;
             // 
             // lblActividad
             // 
@@ -220,14 +210,40 @@
             lblClienteResultado.ForeColor = SystemColors.Control;
             lblClienteResultado.Location = new Point(86, 169);
             lblClienteResultado.Name = "lblClienteResultado";
-            lblClienteResultado.Size = new Size(63, 25);
+            lblClienteResultado.Size = new Size(172, 25);
             lblClienteResultado.TabIndex = 20;
-            lblClienteResultado.Text = "label1";
+            lblClienteResultado.Text = "Datos Encontrados";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dateTimePicker1.Location = new Point(172, 235);
+            dateTimePicker1.MaxDate = new DateTime(2100, 12, 31, 0, 0, 0, 0);
+            dateTimePicker1.MinDate = new DateTime(2025, 1, 1, 0, 0, 0, 0);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(227, 30);
+            dateTimePicker1.TabIndex = 21;
+            dateTimePicker1.Value = new DateTime(2025, 6, 17, 0, 0, 0, 0);
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dateTimePicker2.Location = new Point(685, 235);
+            dateTimePicker2.MaxDate = new DateTime(2100, 12, 31, 0, 0, 0, 0);
+            dateTimePicker2.MinDate = new DateTime(2025, 1, 1, 0, 0, 0, 0);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(227, 30);
+            dateTimePicker2.TabIndex = 22;
+            dateTimePicker2.Value = new DateTime(2025, 6, 17, 0, 0, 0, 0);
+            dateTimePicker2.ValueChanged += dateTimePicker2_ValueChanged;
             // 
             // RegistrarPago
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
             ClientSize = new Size(1029, 676);
+            Controls.Add(dateTimePicker2);
+            Controls.Add(dateTimePicker1);
             Controls.Add(lblClienteResultado);
             Controls.Add(lblPromocion);
             Controls.Add(lblForma);
@@ -241,8 +257,6 @@
             Controls.Add(cmbPromocion);
             Controls.Add(cmbFormaPago);
             Controls.Add(txtMonto);
-            Controls.Add(txtVencimiento);
-            Controls.Add(txtFecha);
             Controls.Add(lblCliente);
             Controls.Add(btnLimpiarBuscar);
             Controls.Add(btnBuscar);
@@ -252,8 +266,6 @@
             Controls.SetChildIndex(btnBuscar, 0);
             Controls.SetChildIndex(btnLimpiarBuscar, 0);
             Controls.SetChildIndex(lblCliente, 0);
-            Controls.SetChildIndex(txtFecha, 0);
-            Controls.SetChildIndex(txtVencimiento, 0);
             Controls.SetChildIndex(txtMonto, 0);
             Controls.SetChildIndex(cmbFormaPago, 0);
             Controls.SetChildIndex(cmbPromocion, 0);
@@ -267,6 +279,8 @@
             Controls.SetChildIndex(lblForma, 0);
             Controls.SetChildIndex(lblPromocion, 0);
             Controls.SetChildIndex(lblClienteResultado, 0);
+            Controls.SetChildIndex(dateTimePicker1, 0);
+            Controls.SetChildIndex(dateTimePicker2, 0);
             ResumeLayout(false);
             PerformLayout();
             // 
@@ -279,8 +293,6 @@
         private Button btnBuscar;
         private Button btnLimpiarBuscar;
         private Label lblCliente;
-        private TextBox txtFecha;
-        private TextBox txtVencimiento;
         private TextBox txtMonto;
         private ComboBox cmbFormaPago;
         private ComboBox cmbPromocion;
@@ -294,5 +306,7 @@
         private Label lblForma;
         private Label lblPromocion;
         private Label lblClienteResultado;
+        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dateTimePicker2;
     }
 }

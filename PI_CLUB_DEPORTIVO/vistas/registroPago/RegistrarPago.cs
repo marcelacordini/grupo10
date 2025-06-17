@@ -8,12 +8,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PI_CLUB_DEPORTIVO.vistas
 {
@@ -30,41 +32,40 @@ namespace PI_CLUB_DEPORTIVO.vistas
             MySqlConnection sqlCon = new MySqlConnection();
             try
             {
-                sqlCon = Conexion.getInstancia().CrearConexion();
                 string idCliente = txtClienteID.Text;
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                string query = "SELECT nombre, apellido, tipoCliente FROM cliente WHERE id = @id";
+                MySqlCommand cmd = new MySqlCommand(query, sqlCon);
+                cmd.Parameters.AddWithValue("@id", idCliente);
+                sqlCon.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
 
-                using (MySqlConnection con = new MySqlConnection("tu_conexion"))
+                if (reader.Read())
                 {
-                    con.Open();
-                    string query = "SELECT nombre, apellido, tipo_cliente FROM cliente WHERE id = @id";
-                    MySqlCommand cmd = new MySqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@id", idCliente);
+                    string nombre = reader.GetString("nombre");
+                    string apellido = reader.GetString("apellido");
+                    string tipo = reader.GetString("tipoCliente");
 
-                    MySqlDataReader reader = cmd.ExecuteReader();
+                    lblClienteResultado.Text = $"Cliente N° {idCliente} - {nombre} {apellido} - {tipo}";
 
-                    if (reader.Read())
+                    if (tipo == "socio")
                     {
-                        string nombre = reader.GetString("nombre");
-                        string apellido = reader.GetString("apellido");
-                        string tipo = reader.GetString("tipo_cliente");
-
-                        lblClienteResultado.Text = $"Cliente N° {idCliente} - {nombre} {apellido} - {tipo}";
-
-                        if (tipo == "socio")
-                        {
-                            cmbActividad.Enabled = false;
-                        }
-                        else
-                        {
-                            cmbActividad.Enabled = true;
-                        }
+                        cmbActividad.Enabled = false;
+                        lblActividad.Text = "Cuota";
                     }
-                                    
                     else
                     {
-                        MessageBox.Show("Cliente no encontrado.");
+                        cmbActividad.Enabled = true;
+                        dateTimePicker2.Enabled = false;
+                        txtMonto.Enabled = false;
                     }
                 }
+
+                else
+                {
+                    MessageBox.Show("Cliente no encontrado.");
+                }
+
 
             }
             catch (Exception ex)
@@ -79,46 +80,139 @@ namespace PI_CLUB_DEPORTIVO.vistas
             }
         }
 
-
-        private void btnRegistrar_Click(object sender, EventArgs e)
+        private void btnRegistrar_Click_1(object sender, EventArgs e)
         {
-            using (MySqlConnection con = new MySqlConnection("tu_conexion"))
+            if (string.IsNullOrEmpty(txtMonto.Text))
             {
-                con.Open();
-                
-                string query = "INSERT INTO cuota (cliente_id, fecha_vencimiento, fecha,  monto, forma_pago, promocion, estado) " +
-                               "VALUES (@cliente_id, @vencimiento, @fecha,  @monto, @forma, @promo, 'pagada')";
+                ErrorMsgRequiered(txtMonto, "Monto");
+                return;
+            }
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
 
-                
-                MySqlCommand cmd = new MySqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@cliente_id", txtClienteID.Text);
-                cmd.Parameters.AddWithValue("@fecha", DateTime.Parse(txtFecha.Text));
-                cmd.Parameters.AddWithValue("@vencimiento", DateTime.Parse(txtVencimiento.Text));
-                cmd.Parameters.AddWithValue("@monto", decimal.Parse(txtMonto.Text.Replace("$", "").Trim()));
-                cmd.Parameters.AddWithValue("@forma", cmbFormaPago.SelectedItem.ToString());
-                cmd.Parameters.AddWithValue("@promo", cmbPromocion.SelectedItem.ToString());
-
-                
-                string updateEstado = "UPDATE socio SET estado = 'activo' WHERE cliente_id = @id";
-                MySqlCommand cmdUpdate = new MySqlCommand(updateEstado, con);
-                cmdUpdate.Parameters.AddWithValue("@id", txtClienteID.Text);
-                int result = cmd.ExecuteNonQuery();
-
-                if (result > 0)
+                if (lblActividad.Text == "Cuota")
                 {
-                    MessageBox.Show("Pago registrado con éxito.");
+                    MySqlTransaction transaccion = sqlCon.BeginTransaction();
+
+                    // Armar comando INSERT
+                    string insertCuota = @"INSERT INTO cuota 
+                                        (cliente_id, fechaVencimiento, fechaPago, monto, formaPago, promocion, estado) 
+                                        VALUES (@cliente_id, @vencimiento, @fecha, @monto, @forma, @promo,'pagada')";
+
+                    MySqlCommand cmdInsert = new MySqlCommand(insertCuota, sqlCon, transaccion);
+
+                    cmdInsert.Parameters.AddWithValue("@cliente_id", txtClienteID.Text);
+                    cmdInsert.Parameters.AddWithValue("@fecha", dateTimePicker1.Value); // fecha de pago
+                    cmdInsert.Parameters.AddWithValue("@vencimiento", dateTimePicker2.Value); // fecha de vencimiento
+                    cmdInsert.Parameters.AddWithValue("@monto", decimal.Parse(txtMonto.Text));
+                    cmdInsert.Parameters.AddWithValue("@forma", cmbFormaPago.SelectedItem?.ToString());
+                    cmdInsert.Parameters.AddWithValue("@promo", cmbPromocion.SelectedItem?.ToString());
+
+                    // DEBUG
+                    MessageBox.Show("Ejecutando inserción de cuota...");
+
+                    int filasInsertadas = cmdInsert.ExecuteNonQuery();
+
+                    // UPDATE estado socio
+                    string updateEstado = @"UPDATE socio 
+                            SET estado = 'activo', fechaVencimiento = @vencimiento 
+                            WHERE cliente_id = @id";
+                    MySqlCommand cmdUpdate = new MySqlCommand(updateEstado, sqlCon, transaccion);
+                    cmdUpdate.Parameters.AddWithValue("@id", txtClienteID.Text);
+                    cmdUpdate.Parameters.AddWithValue("@vencimiento", dateTimePicker2.Value);
+
+                    // DEBUG
+                    MessageBox.Show("Actualizando estado del socio...");
+
+                    int filasActualizadas = cmdUpdate.ExecuteNonQuery();
+
+                    // Confirmar transacción
+                    if (filasInsertadas > 0 && filasActualizadas > 0)
+                    {
+                        transaccion.Commit();
+                        MessageBox.Show("✅ Pago de cuota registrado y estado actualizado correctamente.");
+                    }
+                    else
+                    {
+                        transaccion.Rollback();
+                        MessageBox.Show("❌ No se pudo registrar el pago o actualizar el estado del socio.");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Error al registrar el pago.");
+                    // PAGAR ACTIVIDAD 
+
+                    // Busco ID de Actividad
+                    string nombre = cmbActividad.SelectedItem.ToString();
+                    string query = "SELECT id, precio FROM actividad WHERE nombre = @nombre";
+                    MySqlCommand cmd = new MySqlCommand(query, sqlCon);
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    int idActividad = 0;
+                    double precio = 0.0;
+
+                    if (reader.Read())
+                    {
+                        idActividad = reader.GetInt32("id");
+                        precio = reader.GetDouble(reader.GetOrdinal("precio"));
+                        txtMonto.Text = precio.ToString("0.00");
+
+                    }
+                    reader.Close(); // 
+
+
+                    MySqlTransaction transaccion = sqlCon.BeginTransaction();
+
+                    // Armar comando INSERT
+                    string insertCuota = @"INSERT INTO pagoactividad (idActividad, idCliente, fechaPago, formaPago)  
+                                         VALUES (@idActividad, @cliente_id, @fecha, @forma)";
+
+                    MySqlCommand cmdInsert = new MySqlCommand(insertCuota, sqlCon, transaccion);
+                    cmdInsert.Parameters.AddWithValue("@idActividad", idActividad);
+                    cmdInsert.Parameters.AddWithValue("@cliente_id", txtClienteID.Text);
+                    cmdInsert.Parameters.AddWithValue("@fecha", dateTimePicker1.Value); // fecha de pago
+                    cmdInsert.Parameters.AddWithValue("@forma", cmbFormaPago.SelectedItem.ToString());
+
+
+                    // DEBUG
+                    MessageBox.Show("Ejecutando inserción de pago...");
+
+                    int filasInsertadas = cmdInsert.ExecuteNonQuery();
+
+                    // Confirmar transacción
+                    if (filasInsertadas > 0)
+                    {
+                        transaccion.Commit();
+                        MessageBox.Show("✅ Pago de actividad registrado.");
+                    }
+                    else
+                    {
+                        transaccion.Rollback();
+                        MessageBox.Show("❌ No se pudo registrar el pago.");
+                    }
+
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"❗ ERROR: {ex.Message}\n{ex.StackTrace}", "MENSAJE DEL CATCH", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                    sqlCon.Close();
             }
         }
 
+
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txtFecha.Text = DateTime.Now.ToShortDateString();
-            txtVencimiento.Text = DateTime.Now.ToShortDateString();
+            //dateTimePicker1.Value = DateTime.Today;
+            //dateTimePicker2.Value = DateTime.Today.AddDays(30);
             txtMonto.Text = "";
             cmbFormaPago.SelectedIndex = -1;
             cmbPromocion.SelectedIndex = -1;
@@ -128,12 +222,50 @@ namespace PI_CLUB_DEPORTIVO.vistas
         {
 
             txtClienteID.Text = "";
-            lblCliente.Text = "";
+            lblClienteResultado.Text = "";
 
         }
 
-        
-    }
+        private void cmbFormaPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedText = cmbFormaPago.SelectedItem.ToString();
+            if (selectedText == "Efectivo")
+            {
+                cmbPromocion.Text = "1";
+                cmbPromocion.Enabled = false;
+            }
+            else
+            {
+                cmbPromocion.Enabled = true;
+            }
 
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime fechaSeleccionada = dateTimePicker1.Value;
+            dateTimePicker2.Value = fechaSeleccionada.AddDays(30);
+        }
+
+        private void txtVencimiento_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void ErrorMsgRequiered(Control control, string field)
+        {
+            MessageBox.Show($"El campo '{field}' es obligatorio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            control.Focus();
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime fechaSeleccionada = dateTimePicker1.Value.AddDays(30);
+        }
+
+        private void cmbActividad_SelectedValueChanged(object sender, EventArgs e)
+        {
+            txtMonto.Enabled = true;
+        }
+    }
 
 }
