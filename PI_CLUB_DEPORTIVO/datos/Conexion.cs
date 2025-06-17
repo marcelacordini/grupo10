@@ -23,7 +23,7 @@ namespace PI_CLUB_DEPORTIVO.datos
             this.servidor = "localhost";
             this.puerto = "3306";
             this.usuario = "root";
-            this.clave = "";
+            this.clave = "maca2456";
         }
 
 
