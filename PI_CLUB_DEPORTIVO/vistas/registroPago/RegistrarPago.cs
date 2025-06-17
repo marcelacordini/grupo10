@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
 using PI_CLUB_DEPORTIVO.datos;
 using PI_CLUB_DEPORTIVO.entidades;
+using PI_CLUB_DEPORTIVO.util;
 using PI_CLUB_DEPORTIVO.vistas.baseForm;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace PI_CLUB_DEPORTIVO.vistas
@@ -45,8 +48,18 @@ namespace PI_CLUB_DEPORTIVO.vistas
                         string apellido = reader.GetString("apellido");
                         string tipo = reader.GetString("tipo_cliente");
 
-                        lblCliente.Text = $"Cliente N° {idCliente} - {nombre} {apellido} - {tipo}";
+                        lblClienteResultado.Text = $"Cliente N° {idCliente} - {nombre} {apellido} - {tipo}";
+
+                        if (tipo == "socio")
+                        {
+                            cmbActividad.Enabled = false;
+                        }
+                        else
+                        {
+                            cmbActividad.Enabled = true;
+                        }
                     }
+                                    
                     else
                     {
                         MessageBox.Show("Cliente no encontrado.");
@@ -66,14 +79,17 @@ namespace PI_CLUB_DEPORTIVO.vistas
             }
         }
 
+
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             using (MySqlConnection con = new MySqlConnection("tu_conexion"))
             {
                 con.Open();
-                string query = "INSERT INTO pago (cliente_id, fecha, fecha_vencimiento, monto, forma_pago, promocion) " +
-                               "VALUES (@cliente_id, @fecha, @vencimiento, @monto, @forma, @promo)";
+                
+                string query = "INSERT INTO cuota (cliente_id, fecha_vencimiento, fecha,  monto, forma_pago, promocion, estado) " +
+                               "VALUES (@cliente_id, @vencimiento, @fecha,  @monto, @forma, @promo, 'pagada')";
 
+                
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@cliente_id", txtClienteID.Text);
                 cmd.Parameters.AddWithValue("@fecha", DateTime.Parse(txtFecha.Text));
@@ -82,6 +98,10 @@ namespace PI_CLUB_DEPORTIVO.vistas
                 cmd.Parameters.AddWithValue("@forma", cmbFormaPago.SelectedItem.ToString());
                 cmd.Parameters.AddWithValue("@promo", cmbPromocion.SelectedItem.ToString());
 
+                
+                string updateEstado = "UPDATE socio SET estado = 'activo' WHERE cliente_id = @id";
+                MySqlCommand cmdUpdate = new MySqlCommand(updateEstado, con);
+                cmdUpdate.Parameters.AddWithValue("@id", txtClienteID.Text);
                 int result = cmd.ExecuteNonQuery();
 
                 if (result > 0)
@@ -106,11 +126,13 @@ namespace PI_CLUB_DEPORTIVO.vistas
 
         private void btnLimpiarBuscar_Click(object sender, EventArgs e)
         {
-        
+
             txtClienteID.Text = "";
             lblCliente.Text = "";
-            
+
         }
+
+        
     }
 
 
