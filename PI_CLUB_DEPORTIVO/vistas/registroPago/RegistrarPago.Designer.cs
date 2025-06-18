@@ -87,7 +87,7 @@
             // 
             // txtMonto
             // 
-            txtMonto.Location = new Point(685, 312);
+            txtMonto.Location = new Point(667, 312);
             txtMonto.Name = "txtMonto";
             txtMonto.Size = new Size(213, 30);
             txtMonto.TabIndex = 8;
@@ -107,7 +107,7 @@
             cmbPromocion.AutoCompleteCustomSource.AddRange(new string[] { "1", "3", "6" });
             cmbPromocion.FormattingEnabled = true;
             cmbPromocion.Items.AddRange(new object[] { "1", "3", "6" });
-            cmbPromocion.Location = new Point(685, 388);
+            cmbPromocion.Location = new Point(667, 388);
             cmbPromocion.Name = "cmbPromocion";
             cmbPromocion.Size = new Size(213, 31);
             cmbPromocion.TabIndex = 10;
@@ -120,7 +120,7 @@
             btnRegistrar.TabIndex = 11;
             btnRegistrar.Text = "REGISTRAR PAGO";
             btnRegistrar.UseVisualStyleBackColor = true;
-            btnRegistrar.Click += btnRegistrar_Click_1;
+            btnRegistrar.Click += btnRegistrar_Click;
             // 
             // btnLimpiar
             // 
@@ -136,7 +136,7 @@
             // 
             lblFecha.AutoSize = true;
             lblFecha.ForeColor = SystemColors.ControlLight;
-            lblFecha.Location = new Point(83, 242);
+            lblFecha.Location = new Point(83, 233);
             lblFecha.Name = "lblFecha";
             lblFecha.Size = new Size(54, 23);
             lblFecha.TabIndex = 13;
@@ -146,7 +146,7 @@
             // 
             lblFechaVto.AutoSize = true;
             lblFechaVto.ForeColor = SystemColors.ControlLight;
-            lblFechaVto.Location = new Point(507, 246);
+            lblFechaVto.Location = new Point(507, 234);
             lblFechaVto.Name = "lblFechaVto";
             lblFechaVto.Size = new Size(154, 23);
             lblFechaVto.TabIndex = 14;
@@ -156,7 +156,7 @@
             // 
             lblMonto.AutoSize = true;
             lblMonto.ForeColor = SystemColors.ControlLight;
-            lblMonto.Location = new Point(600, 319);
+            lblMonto.Location = new Point(600, 312);
             lblMonto.Name = "lblMonto";
             lblMonto.Size = new Size(61, 23);
             lblMonto.TabIndex = 15;
@@ -197,7 +197,7 @@
             // 
             lblPromocion.AutoSize = true;
             lblPromocion.ForeColor = SystemColors.ControlLight;
-            lblPromocion.Location = new Point(568, 393);
+            lblPromocion.Location = new Point(568, 388);
             lblPromocion.Name = "lblPromocion";
             lblPromocion.Size = new Size(93, 23);
             lblPromocion.TabIndex = 19;
@@ -217,26 +217,21 @@
             // dateTimePicker1
             // 
             dateTimePicker1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dateTimePicker1.Location = new Point(172, 235);
+            dateTimePicker1.Location = new Point(156, 227);
             dateTimePicker1.MaxDate = new DateTime(2100, 12, 31, 0, 0, 0, 0);
             dateTimePicker1.MinDate = new DateTime(2025, 1, 1, 0, 0, 0, 0);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(227, 30);
+            dateTimePicker1.Size = new Size(308, 30);
             dateTimePicker1.TabIndex = 21;
             dateTimePicker1.Value = new DateTime(2025, 6, 17, 0, 0, 0, 0);
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dateTimePicker2.Location = new Point(685, 235);
-            dateTimePicker2.MaxDate = new DateTime(2100, 12, 31, 0, 0, 0, 0);
-            dateTimePicker2.MinDate = new DateTime(2025, 1, 1, 0, 0, 0, 0);
+            dateTimePicker2.Location = new Point(664, 228);
             dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(227, 30);
-            dateTimePicker2.TabIndex = 22;
-            dateTimePicker2.Value = new DateTime(2025, 6, 17, 0, 0, 0, 0);
-            dateTimePicker2.ValueChanged += dateTimePicker2_ValueChanged;
+            dateTimePicker2.Size = new Size(331, 30);
+            dateTimePicker2.TabIndex = 2;
             // 
             // RegistrarPago
             // 
