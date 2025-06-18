@@ -90,8 +90,12 @@ namespace PI_CLUB_DEPORTIVO.vistas
                     );
 
                     if (exito)
+                    {
                         MessageBox.Show("✅ Pago de cuota registrado correctamente y estado del socio actualizado.");
-
+                        MenuPrincipal principal = new MenuPrincipal();
+                        principal.Show();
+                        this.Hide();
+                    }
                     else
                         MessageBox.Show("❌ No se pudo registrar el pago o actualizar el estado.");
                 }
@@ -105,7 +109,12 @@ namespace PI_CLUB_DEPORTIVO.vistas
                     );
 
                     if (exito)
+                    {
                         MessageBox.Show("✅ Pago de actividad registrado.");
+                        MenuPrincipal principal = new MenuPrincipal();
+                        principal.Show();
+                        this.Hide();
+                    }
                     else
                         MessageBox.Show("❌ No se pudo registrar el pago.");
                 }

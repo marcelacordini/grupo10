@@ -13,3 +13,5 @@ namespace PI_CLUB_DEPORTIVO.entidades
         public double Precio { get; set; }
     }
 }
+
+
