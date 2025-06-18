@@ -171,6 +171,7 @@
             cmbActividad.Name = "cmbActividad";
             cmbActividad.Size = new Size(190, 31);
             cmbActividad.TabIndex = 16;
+            cmbActividad.SelectedIndexChanged += cmbActividad_SelectedIndexChanged;
             cmbActividad.SelectedValueChanged += cmbActividad_SelectedValueChanged;
             // 
             // lblActividad

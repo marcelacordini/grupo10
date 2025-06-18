@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using PI_CLUB_DEPORTIVO.entidades;
 using System;
 using System.Data;
 
@@ -69,19 +70,9 @@ namespace PI_CLUB_DEPORTIVO.datos
 
                 try
                 {
-                    int idActividad = 0;
-                    string queryActividad = "SELECT id FROM actividad WHERE nombre = @nombre";
-                    using (MySqlCommand cmdActividad = new MySqlCommand(queryActividad, conn, transaccion))
-                    {
-                        cmdActividad.Parameters.AddWithValue("@nombre", nombreActividad);
-                        using (MySqlDataReader reader = cmdActividad.ExecuteReader())
-                        {
-                            if (reader.Read())
-                                idActividad = reader.GetInt32("id");
-                            else
-                                throw new Exception("Actividad no encontrada.");
-                        }
-                    }
+                    // Nuevo
+                    ActividadDao actividadDao = new ActividadDao();
+                    Actividad actividad = actividadDao.ObtenerActividadPorNombre(nombreActividad);
 
                     string insertPago = @"INSERT INTO pagoactividad 
                         (idActividad, idCliente, fechaPago, formaPago) 
@@ -89,7 +80,7 @@ namespace PI_CLUB_DEPORTIVO.datos
 
                     using (MySqlCommand cmdInsert = new MySqlCommand(insertPago, conn, transaccion))
                     {
-                        cmdInsert.Parameters.AddWithValue("@idActividad", idActividad);
+                        cmdInsert.Parameters.AddWithValue("@idActividad", actividad.Id);
                         cmdInsert.Parameters.AddWithValue("@idCliente", clienteId);
                         cmdInsert.Parameters.AddWithValue("@fechaPago", fechaPago);
                         cmdInsert.Parameters.AddWithValue("@formaPago", formaPago);

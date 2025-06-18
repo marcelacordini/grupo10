@@ -3,6 +3,7 @@ using PI_CLUB_DEPORTIVO.entidades;
 using System;
 using System.Windows.Forms;
 using PI_CLUB_DEPORTIVO.vistas.baseForm;
+using System.Drawing;
 
 
 namespace PI_CLUB_DEPORTIVO.vistas
@@ -35,7 +36,7 @@ namespace PI_CLUB_DEPORTIVO.vistas
 
                         if (cliente.TipoCliente == "socio")
                         {
-                            lblActividad.Text = "Cuota"; 
+                            lblActividad.Text = "Cuota";
                             cmbActividad.Visible = false;
                             lblActividad.Visible = false;
                             dateTimePicker2.Visible = true;
@@ -90,7 +91,7 @@ namespace PI_CLUB_DEPORTIVO.vistas
 
                     if (exito)
                         MessageBox.Show("✅ Pago de cuota registrado correctamente y estado del socio actualizado.");
-                        
+
                     else
                         MessageBox.Show("❌ No se pudo registrar el pago o actualizar el estado.");
                 }
@@ -104,14 +105,14 @@ namespace PI_CLUB_DEPORTIVO.vistas
                     );
 
                     if (exito)
-                        MessageBox.Show("✅ Pago de actividad registrado y estado de socio actualizado.");
+                        MessageBox.Show("✅ Pago de actividad registrado.");
                     else
                         MessageBox.Show("❌ No se pudo registrar el pago.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("❗ Error: " );
+                MessageBox.Show("❗ Error: ");
             }
         }
 
@@ -127,6 +128,7 @@ namespace PI_CLUB_DEPORTIVO.vistas
             try
             {
                 txtMonto.Text = "";
+
 
                 if (cmbFormaPago.Items.Count > 0)
                     cmbFormaPago.SelectedIndex = -1;
@@ -174,9 +176,12 @@ namespace PI_CLUB_DEPORTIVO.vistas
 
         private void cmbActividad_SelectedValueChanged(object sender, EventArgs e)
         {
-            txtMonto.Enabled = true;
+            
         }
 
-       
+        private void cmbActividad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
     }
 }
