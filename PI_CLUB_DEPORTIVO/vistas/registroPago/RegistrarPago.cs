@@ -176,11 +176,30 @@ namespace PI_CLUB_DEPORTIVO.vistas
 
         private void cmbActividad_SelectedValueChanged(object sender, EventArgs e)
         {
-            
+            try
+            {
+                // Obtener el nombre de la actividad seleccionada
+                string nombreSeleccionado = cmbActividad.SelectedItem.ToString();
+
+                // Instanciar el DAO
+                ActividadDao actividadDao = new ActividadDao();
+
+                // Obtener la actividad desde la base de datos
+                Actividad actividad = actividadDao.ObtenerActividadPorNombre(nombreSeleccionado);
+
+                // Mostrar los datos en controles del formulario (ejemplo)
+                txtMonto.Text = actividad.Precio.ToString("F2");  // si tenés un TextBox para mostrar el precio
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar la actividad: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void cmbActividad_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
            
         }
     }
