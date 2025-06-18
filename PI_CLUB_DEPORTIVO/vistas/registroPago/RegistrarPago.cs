@@ -39,7 +39,9 @@ namespace PI_CLUB_DEPORTIVO.vistas
                             cmbActividad.Visible = false;
                             lblActividad.Visible = false;
                             dateTimePicker2.Visible = true;
-                            
+                            lblMonto.Text = "Monto Cuota";
+
+
                         }
                         else
                         {
@@ -48,7 +50,6 @@ namespace PI_CLUB_DEPORTIVO.vistas
                             cmbActividad.Visible = true;
                             lblFechaVto.Visible = false;
                             dateTimePicker2.Visible = false;
-                            txtMonto.Enabled = false;
                             lblActividad.Text = "Actividad";
                         }
                     }
@@ -88,10 +89,10 @@ namespace PI_CLUB_DEPORTIVO.vistas
                     );
 
                     if (exito)
-                        MessageBox.Show("✅ Pago de cuota registrado correctamente.");
+                        MessageBox.Show("✅ Pago de cuota registrado correctamente y estado del socio actualizado.");
                         
                     else
-                        MessageBox.Show("❌ No se pudo registrar el pago.");
+                        MessageBox.Show("❌ No se pudo registrar el pago o actualizar el estado.");
                 }
                 else
                 {
@@ -123,9 +124,23 @@ namespace PI_CLUB_DEPORTIVO.vistas
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txtMonto.Text = "";
-            cmbFormaPago.SelectedIndex = -1;
-            cmbPromocion.SelectedIndex = -1;
+            try
+            {
+                txtMonto.Text = "";
+
+                if (cmbFormaPago.Items.Count > 0)
+                    cmbFormaPago.SelectedIndex = -1;
+
+                if (cmbPromocion.Items.Count > 0)
+                {
+                    cmbPromocion.SelectedIndex = -1;
+                    cmbPromocion.Enabled = true; // Por si venía de efectivo
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("❗ Error al limpiar campos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnLimpiarBuscar_Click(object sender, EventArgs e)
@@ -136,6 +151,9 @@ namespace PI_CLUB_DEPORTIVO.vistas
 
         private void cmbFormaPago_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbFormaPago.SelectedItem == null)
+                return;
+
             string selectedText = cmbFormaPago.SelectedItem.ToString();
             if (selectedText == "Efectivo")
             {
@@ -147,6 +165,7 @@ namespace PI_CLUB_DEPORTIVO.vistas
                 cmbPromocion.Enabled = true;
             }
         }
+
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
