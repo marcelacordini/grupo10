@@ -46,18 +46,20 @@
             lblClienteResultado = new Label();
             dateTimePicker1 = new DateTimePicker();
             dateTimePicker2 = new DateTimePicker();
+            btnComprobante = new Button();
+            label1 = new Label();
             SuspendLayout();
             // 
             // txtClienteID
             // 
-            txtClienteID.Location = new Point(83, 114);
+            txtClienteID.Location = new Point(75, 166);
             txtClienteID.Name = "txtClienteID";
             txtClienteID.Size = new Size(285, 30);
             txtClienteID.TabIndex = 2;
             // 
             // btnBuscar
             // 
-            btnBuscar.Location = new Point(499, 114);
+            btnBuscar.Location = new Point(491, 166);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Size = new Size(178, 30);
             btnBuscar.TabIndex = 3;
@@ -67,7 +69,7 @@
             // 
             // btnLimpiarBuscar
             // 
-            btnLimpiarBuscar.Location = new Point(720, 114);
+            btnLimpiarBuscar.Location = new Point(712, 166);
             btnLimpiarBuscar.Name = "btnLimpiarBuscar";
             btnLimpiarBuscar.Size = new Size(178, 30);
             btnLimpiarBuscar.TabIndex = 4;
@@ -79,7 +81,7 @@
             // 
             lblCliente.AutoSize = true;
             lblCliente.ForeColor = SystemColors.ControlLight;
-            lblCliente.Location = new Point(83, 78);
+            lblCliente.Location = new Point(75, 130);
             lblCliente.Name = "lblCliente";
             lblCliente.Size = new Size(85, 23);
             lblCliente.TabIndex = 5;
@@ -87,7 +89,7 @@
             // 
             // txtMonto
             // 
-            txtMonto.Location = new Point(628, 319);
+            txtMonto.Location = new Point(620, 371);
             txtMonto.Name = "txtMonto";
             txtMonto.Size = new Size(213, 30);
             txtMonto.TabIndex = 8;
@@ -96,7 +98,7 @@
             // 
             cmbFormaPago.FormattingEnabled = true;
             cmbFormaPago.Items.AddRange(new object[] { "Tarjeta", "Efectivo" });
-            cmbFormaPago.Location = new Point(172, 393);
+            cmbFormaPago.Location = new Point(164, 445);
             cmbFormaPago.Name = "cmbFormaPago";
             cmbFormaPago.Size = new Size(190, 31);
             cmbFormaPago.TabIndex = 9;
@@ -107,14 +109,14 @@
             cmbPromocion.AutoCompleteCustomSource.AddRange(new string[] { "1", "3", "6" });
             cmbPromocion.FormattingEnabled = true;
             cmbPromocion.Items.AddRange(new object[] { "1", "3", "6" });
-            cmbPromocion.Location = new Point(628, 388);
+            cmbPromocion.Location = new Point(620, 440);
             cmbPromocion.Name = "cmbPromocion";
             cmbPromocion.Size = new Size(213, 31);
             cmbPromocion.TabIndex = 10;
             // 
             // btnRegistrar
             // 
-            btnRegistrar.Location = new Point(92, 482);
+            btnRegistrar.Location = new Point(84, 534);
             btnRegistrar.Name = "btnRegistrar";
             btnRegistrar.Size = new Size(196, 43);
             btnRegistrar.TabIndex = 11;
@@ -124,7 +126,7 @@
             // 
             // btnLimpiar
             // 
-            btnLimpiar.Location = new Point(389, 482);
+            btnLimpiar.Location = new Point(381, 534);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(214, 42);
             btnLimpiar.TabIndex = 12;
@@ -136,7 +138,7 @@
             // 
             lblFecha.AutoSize = true;
             lblFecha.ForeColor = SystemColors.ControlLight;
-            lblFecha.Location = new Point(83, 228);
+            lblFecha.Location = new Point(75, 280);
             lblFecha.Name = "lblFecha";
             lblFecha.Size = new Size(54, 23);
             lblFecha.TabIndex = 13;
@@ -146,7 +148,7 @@
             // 
             lblFechaVto.AutoSize = true;
             lblFechaVto.ForeColor = SystemColors.ControlLight;
-            lblFechaVto.Location = new Point(486, 227);
+            lblFechaVto.Location = new Point(478, 279);
             lblFechaVto.Name = "lblFechaVto";
             lblFechaVto.Size = new Size(154, 23);
             lblFechaVto.TabIndex = 14;
@@ -156,7 +158,7 @@
             // 
             lblMonto.AutoSize = true;
             lblMonto.ForeColor = SystemColors.ControlLight;
-            lblMonto.Location = new Point(499, 322);
+            lblMonto.Location = new Point(491, 374);
             lblMonto.Name = "lblMonto";
             lblMonto.Size = new Size(61, 23);
             lblMonto.TabIndex = 15;
@@ -167,18 +169,17 @@
             cmbActividad.AutoCompleteCustomSource.AddRange(new string[] { "Zumba", "Yoga", "Crossfit", "Funcional", "Pilates", "Spinning", "Boxeo" });
             cmbActividad.FormattingEnabled = true;
             cmbActividad.Items.AddRange(new object[] { "Zumba", "Yoga", "Crossfit", "Funcional", "Pilates", "Spinning", "Boxeo" });
-            cmbActividad.Location = new Point(172, 319);
+            cmbActividad.Location = new Point(164, 371);
             cmbActividad.Name = "cmbActividad";
             cmbActividad.Size = new Size(190, 31);
             cmbActividad.TabIndex = 16;
-            cmbActividad.SelectedIndexChanged += cmbActividad_SelectedIndexChanged;
             cmbActividad.SelectedValueChanged += cmbActividad_SelectedValueChanged;
             // 
             // lblActividad
             // 
             lblActividad.AutoSize = true;
             lblActividad.ForeColor = SystemColors.ControlLight;
-            lblActividad.Location = new Point(83, 327);
+            lblActividad.Location = new Point(75, 379);
             lblActividad.Name = "lblActividad";
             lblActividad.Size = new Size(80, 23);
             lblActividad.TabIndex = 17;
@@ -188,7 +189,7 @@
             // 
             lblForma.AutoSize = true;
             lblForma.ForeColor = SystemColors.ControlLight;
-            lblForma.Location = new Point(83, 396);
+            lblForma.Location = new Point(75, 448);
             lblForma.Name = "lblForma";
             lblForma.Size = new Size(58, 23);
             lblForma.TabIndex = 18;
@@ -198,7 +199,7 @@
             // 
             lblPromocion.AutoSize = true;
             lblPromocion.ForeColor = SystemColors.ControlLight;
-            lblPromocion.Location = new Point(499, 393);
+            lblPromocion.Location = new Point(491, 445);
             lblPromocion.Name = "lblPromocion";
             lblPromocion.Size = new Size(93, 23);
             lblPromocion.TabIndex = 19;
@@ -209,7 +210,7 @@
             lblClienteResultado.AutoSize = true;
             lblClienteResultado.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblClienteResultado.ForeColor = SystemColors.Control;
-            lblClienteResultado.Location = new Point(86, 169);
+            lblClienteResultado.Location = new Point(78, 221);
             lblClienteResultado.Name = "lblClienteResultado";
             lblClienteResultado.Size = new Size(172, 25);
             lblClienteResultado.TabIndex = 20;
@@ -218,7 +219,7 @@
             // dateTimePicker1
             // 
             dateTimePicker1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dateTimePicker1.Location = new Point(143, 227);
+            dateTimePicker1.Location = new Point(135, 279);
             dateTimePicker1.MaxDate = new DateTime(2100, 12, 31, 0, 0, 0, 0);
             dateTimePicker1.MinDate = new DateTime(2025, 1, 1, 0, 0, 0, 0);
             dateTimePicker1.Name = "dateTimePicker1";
@@ -229,15 +230,39 @@
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Location = new Point(646, 222);
+            dateTimePicker2.Location = new Point(638, 274);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(331, 30);
             dateTimePicker2.TabIndex = 2;
+            // 
+            // btnComprobante
+            // 
+            btnComprobante.Location = new Point(699, 535);
+            btnComprobante.Name = "btnComprobante";
+            btnComprobante.Size = new Size(214, 42);
+            btnComprobante.TabIndex = 22;
+            btnComprobante.Text = "COMPROBANTE";
+            btnComprobante.UseVisualStyleBackColor = true;
+            btnComprobante.Visible = false;
+            btnComprobante.Click += btnComprobante_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = SystemColors.Control;
+            label1.Location = new Point(426, 70);
+            label1.Name = "label1";
+            label1.Size = new Size(183, 25);
+            label1.TabIndex = 23;
+            label1.Text = "REGISTRO DE PAGO";
             // 
             // RegistrarPago
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
             ClientSize = new Size(1029, 676);
+            Controls.Add(label1);
+            Controls.Add(btnComprobante);
             Controls.Add(dateTimePicker2);
             Controls.Add(dateTimePicker1);
             Controls.Add(lblClienteResultado);
@@ -277,6 +302,8 @@
             Controls.SetChildIndex(lblClienteResultado, 0);
             Controls.SetChildIndex(dateTimePicker1, 0);
             Controls.SetChildIndex(dateTimePicker2, 0);
+            Controls.SetChildIndex(btnComprobante, 0);
+            Controls.SetChildIndex(label1, 0);
             ResumeLayout(false);
             PerformLayout();
             // 
@@ -304,5 +331,7 @@
         private Label lblClienteResultado;
         private DateTimePicker dateTimePicker1;
         private DateTimePicker dateTimePicker2;
+        private Button btnComprobante;
+        private Label label1;
     }
 }

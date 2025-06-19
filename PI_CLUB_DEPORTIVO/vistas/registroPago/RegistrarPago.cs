@@ -66,6 +66,7 @@ namespace PI_CLUB_DEPORTIVO.vistas
             }
         }
 
+        private int tipoPagoSeleccionado;
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtMonto.Text))
@@ -92,9 +93,8 @@ namespace PI_CLUB_DEPORTIVO.vistas
                     if (exito)
                     {
                         MessageBox.Show("✅ Pago de cuota registrado correctamente y estado del socio actualizado.");
-                        MenuPrincipal principal = new MenuPrincipal();
-                        principal.Show();
-                        this.Hide();
+                        tipoPagoSeleccionado = 1;
+                        btnComprobante.Visible = true;
                     }
                     else
                         MessageBox.Show("❌ No se pudo registrar el pago o actualizar el estado.");
@@ -111,9 +111,9 @@ namespace PI_CLUB_DEPORTIVO.vistas
                     if (exito)
                     {
                         MessageBox.Show("✅ Pago de actividad registrado.");
-                        MenuPrincipal principal = new MenuPrincipal();
-                        principal.Show();
-                        this.Hide();
+                        tipoPagoSeleccionado = 2;
+                        btnComprobante.Visible = true;
+                        int tipo = 1;
                     }
                     else
                         MessageBox.Show("❌ No se pudo registrar el pago.");
@@ -198,7 +198,7 @@ namespace PI_CLUB_DEPORTIVO.vistas
 
                 // Mostrar los datos en controles del formulario (ejemplo)
                 txtMonto.Text = actividad.Precio.ToString("F2");  // si tenés un TextBox para mostrar el precio
-                
+
             }
             catch (Exception ex)
             {
@@ -206,10 +206,14 @@ namespace PI_CLUB_DEPORTIVO.vistas
             }
         }
 
-        private void cmbActividad_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnComprobante_Click(object sender, EventArgs e)
         {
-           
-           
+            ComprobantePago comprobantePagoForm = new ComprobantePago(tipoPagoSeleccionado);
+
+            comprobantePagoForm.Show();
+
+            this.Hide();
+
         }
     }
 }
