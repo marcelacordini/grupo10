@@ -28,21 +28,16 @@ namespace PI_CLUB_DEPORTIVO.vistas.listaSociosInactivos
             this.TituloBarra = "Lista de Socios Inactivos";
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void socioInactivo_Load(object sender, EventArgs e)
         {
-          
+
             // Cargar la lista de socios inactivos con cuota vencida
             CargarSociosInactivos();
 
             // ✅ Aplicar estilos del BaseForm
             this.TituloBarra = "SOCIOS INACTIVOS"; // cambia el texto del encabezado superior
 
-            EstiloTitulo(label1); 
+            EstiloTitulo(label1);
 
         }
 
@@ -68,7 +63,7 @@ namespace PI_CLUB_DEPORTIVO.vistas.listaSociosInactivos
                 {
                     dataGridView1.DataSource = dt;
                     dataGridView1.AutoGenerateColumns = true;
-                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                     // 🎨 Estilizar DataGridView
                     dataGridView1.BackgroundColor = Color.FromArgb(64, 71, 100); // mismo fondo que el formulario
@@ -83,6 +78,7 @@ namespace PI_CLUB_DEPORTIVO.vistas.listaSociosInactivos
                     dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
                     dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
                     dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    dataGridView1.ColumnHeadersDefaultCellStyle.Padding = new Padding(0);
 
                     // Celdas
                     dataGridView1.DefaultCellStyle.BackColor = Color.FromArgb(64, 71, 100);
@@ -99,23 +95,23 @@ namespace PI_CLUB_DEPORTIVO.vistas.listaSociosInactivos
                     dataGridView1.Refresh();
 
                     // Altura dinámica (con tope)
-                    int totalHeight = dataGridView1.ColumnHeadersHeight;
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
-                        totalHeight += row.Height;
-                    int maxHeight = 400;
-                    dataGridView1.Height = Math.Min(totalHeight + 10, maxHeight);
+                    //int totalHeight = dataGridView1.ColumnHeadersHeight;
+                    //foreach (DataGridViewRow row in dataGridView1.Rows)
+                    //    totalHeight += row.Height;
+                    //int maxHeight = 400;
+                    //dataGridView1.Height = Math.Min(totalHeight + 10, maxHeight);
 
-                    // Ancho dinámico
-                    int totalWidth = dataGridView1.RowHeadersWidth;
-                    foreach (DataGridViewColumn col in dataGridView1.Columns)
-                        if (col.Visible)
-                            totalWidth += col.Width;
-                    dataGridView1.Width = totalWidth + 10;
-                    // Centrar horizontalmente el DataGridView en el formulario
-                    dataGridView1.Location = new Point(
-                        (this.ClientSize.Width - dataGridView1.Width) / 2,
-                        dataGridView1.Location.Y
-                    );
+                    //// Ancho dinámico
+                    //int totalWidth = dataGridView1.RowHeadersWidth;
+                    //foreach (DataGridViewColumn col in dataGridView1.Columns)
+                    //    if (col.Visible)
+                    //        totalWidth += col.Width;
+                    //dataGridView1.Width = totalWidth + 10;
+                    //// Centrar horizontalmente el DataGridView en el formulario
+                    //dataGridView1.Location = new Point(
+                    //    (this.ClientSize.Width - dataGridView1.Width) / 2,
+                    //    dataGridView1.Location.Y
+                    //);
 
                 }
                 else
@@ -132,6 +128,11 @@ namespace PI_CLUB_DEPORTIVO.vistas.listaSociosInactivos
                 if (conn.State == ConnectionState.Open)
                     conn.Close();
             }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            BackToMenu(this);
         }
     }
 }
