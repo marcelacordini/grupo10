@@ -235,18 +235,19 @@ DELIMITER //
 CREATE PROCEDURE obtener_socios_inactivos_vencidos()
 BEGIN
     SELECT 
-        c.id AS id_cliente, 
-        c.nombre, 
-        c.apellido, 
+        -- c.id AS id_cliente,
+    	Concat(c.nombre, ' ', c.apellido) AS 'Cliente',
+        -- c.nombre AS 'Nombre', 
+        -- c.apellido AS 'Apellido',
         CASE 
             WHEN q.estado = 'vencida' AND q.fechaPago IS NULL THEN 'inactivo'
             ELSE 'activo'
-        END AS estado_socio, 
-        c.dni, 
-        c.correo, 
-        c.telefono, 
-        q.fechaVencimiento AS fecha_vencimiento_cuota,
-        DATEDIFF(CURDATE(), q.fechaVencimiento) AS dias_vencidos_cuota
+        END AS 'Estado', 
+        c.dni AS 'DNI', 
+        c.correo AS 'Correo',
+        c.telefono AS 'Teléfono', 
+        q.fechaVencimiento AS 'Fecha de vencimiento'
+        -- DATEDIFF(CURDATE(), q.fechaVencimiento) AS dias_vencidos_cuota
     FROM 
         cliente c
     JOIN 
