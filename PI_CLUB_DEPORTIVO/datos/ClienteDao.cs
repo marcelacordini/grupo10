@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
 using PI_CLUB_DEPORTIVO.entidades;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PI_CLUB_DEPORTIVO.datos
 {
@@ -15,21 +9,19 @@ namespace PI_CLUB_DEPORTIVO.datos
     {
         public string NuevoCliente(Cliente nuevo)
         {
-            string? respuestaBD;
+            string respuestaBD;
 
             MySqlConnection sqlCon = new MySqlConnection();
 
             try
             {
                 sqlCon = Conexion.getInstancia().CrearConexion();
-                
-                
 
-                // Parametros de entrada SP
-                MySqlCommand comando = new MySqlCommand("NuevoCliente", sqlCon);
-                
-                comando.CommandType = CommandType.StoredProcedure;
-                
+                MySqlCommand comando = new MySqlCommand("NuevoCliente", sqlCon)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
                 comando.Parameters.Add("Nom", MySqlDbType.VarChar).Value = nuevo.Nombre;
                 comando.Parameters.Add("Ape", MySqlDbType.VarChar).Value = nuevo.Apellido;
                 comando.Parameters.Add("Doc", MySqlDbType.Decimal).Value = nuevo.Dni;
@@ -40,15 +32,13 @@ namespace PI_CLUB_DEPORTIVO.datos
                 comando.Parameters.Add("AFis", MySqlDbType.Bit).Value = nuevo.AptoFisico;
                 comando.Parameters.Add("Tip", MySqlDbType.VarChar).Value = nuevo.TipoCliente;
 
-                //Parametros de salida SP
-                MySqlParameter ParamSalida = new MySqlParameter();
-                
-                ParamSalida.ParameterName = "rta";
-                ParamSalida.MySqlDbType = MySqlDbType.Int32;
-                ParamSalida.Direction = ParameterDirection.Output;
+                // Parametro de salida
+                MySqlParameter ParamSalida = new MySqlParameter("rta", MySqlDbType.Int32)
+                {
+                    Direction = ParameterDirection.Output
+                };
                 comando.Parameters.Add(ParamSalida);
 
-                // Abrimos la conexión
                 sqlCon.Open();
                 comando.ExecuteNonQuery();
                 respuestaBD = Convert.ToString(ParamSalida.Value);
@@ -65,5 +55,37 @@ namespace PI_CLUB_DEPORTIVO.datos
 
             return respuestaBD;
         }
+
+        public Cliente? BuscarPorId(int idCliente)
+        {
+            Cliente? clienteEncontrado = null;
+
+            using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
+            {
+                conn.Open();
+                string query = "SELECT nombre, apellido, tipoCliente FROM cliente WHERE id = @id";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", idCliente);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            clienteEncontrado = new Cliente
+                            {
+                                Id = idCliente,
+                                Nombre = reader.GetString("nombre"),
+                                Apellido = reader.GetString("apellido"),
+                                TipoCliente = reader.GetString("tipoCliente")
+                            };
+                        }
+                    }
+                }
+            }
+
+            return clienteEncontrado;
+        }
     }
+    
 }

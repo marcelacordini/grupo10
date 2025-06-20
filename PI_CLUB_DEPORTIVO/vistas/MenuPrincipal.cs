@@ -47,7 +47,12 @@ namespace PI_CLUB_DEPORTIVO.vistas
 
         private void btnPagarCuotaoActividad_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("VENTANA DE PAGO", "Info", MessageBoxButtons.OK);
+            RegistrarPago registrarPagoForm = new RegistrarPago();
+
+            registrarPagoForm.Show();
+
+            this.Hide();
+            
         }
 
         private void btnSociosConCuotaVencida_Click(object sender, EventArgs e)
