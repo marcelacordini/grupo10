@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,15 @@ namespace PI_CLUB_DEPORTIVO.vistas.baseForm
     public partial class BaseForm : Form
     {
         protected Font tituloFont = new Font("Segoe UI", 14, FontStyle.Bold);
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HTCAPTION = 0x2;
+
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 
         public BaseForm()
         {
@@ -58,7 +68,6 @@ namespace PI_CLUB_DEPORTIVO.vistas.baseForm
         }
 
 
-
         private void InitUI()
         {
             LoadIcon(btnClose, "\ue5cd", 20);
@@ -67,16 +76,26 @@ namespace PI_CLUB_DEPORTIVO.vistas.baseForm
             this.panel.Dock = DockStyle.Top;
         }
 
-        public void EstiloTitulo(Control elementoTitulo)
+        public void EstiloTitulo(Label elementoTitulo)
         {
             elementoTitulo.Font = this.tituloFont;
             elementoTitulo.ForeColor = config.PaletaColores.AcentoPrincipal;
             elementoTitulo.Text = elementoTitulo.Text.ToUpper();
+            elementoTitulo.TextAlign = ContentAlignment.MiddleCenter; 
         }
         
         public void EstiloBotonPrincipal(Control boton)
         {
             boton.Padding = new Padding(10);
+        }
+
+        private void PanelHeader_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+            }
         }
     }
 }
