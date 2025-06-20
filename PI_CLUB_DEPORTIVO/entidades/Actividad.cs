@@ -11,6 +11,7 @@ namespace PI_CLUB_DEPORTIVO.entidades
         public int Id { get; set; }
         public string Nombre { get; set; }
         public double Precio { get; set; }
+        public int Cupo { get; set; }
     }
 }
 

@@ -24,7 +24,8 @@ namespace PI_CLUB_DEPORTIVO.datos
                             {
                                 Id = reader.GetInt32("id"),
                                 Nombre = reader.GetString("nombre"),
-                                Precio = reader.GetDouble("precio")
+                                Precio = reader.GetDouble("precio"),
+                                Cupo = reader.GetInt32("id"),
                             };
                         }
                         else
@@ -35,5 +36,19 @@ namespace PI_CLUB_DEPORTIVO.datos
                 }
             }
         }
+        
+        public void DescontarCupo(int idActividad)
+        {
+            using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
+            {
+                conn.Open();
+                string query = "UPDATE actividad SET cupo = cupo - 1 WHERE id = @idActividad AND cupo > 0";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@idActividad", idActividad);
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
+
+
 }

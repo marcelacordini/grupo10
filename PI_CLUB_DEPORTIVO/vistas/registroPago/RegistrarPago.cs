@@ -75,6 +75,24 @@ namespace PI_CLUB_DEPORTIVO.vistas
                 return;
             }
 
+            if (!float.TryParse(txtMonto.Text, out float monto))
+            {
+                MessageBox.Show("El monto debe ser un número válido.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(cmbFormaPago.Text))
+            {
+                ErrorMsgRequiered(txtMonto, "Forma de Pago");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(cmbPromocion.Text))
+            {
+                ErrorMsgRequiered(txtMonto, "Cantidad de cuotas");
+                return;
+            }
+
             try
             {
                 PagoDao pagoDao = new PagoDao();
@@ -101,6 +119,13 @@ namespace PI_CLUB_DEPORTIVO.vistas
                 }
                 else
                 {
+                    if (string.IsNullOrEmpty(cmbActividad.Text))
+                    {
+                        ErrorMsgRequiered(txtMonto, "Actividad");
+                        return;
+                    }
+
+
                     bool exito = pagoDao.RegistrarPagoActividad(
                         int.Parse(txtClienteID.Text),
                         cmbActividad.SelectedItem?.ToString(),
@@ -196,9 +221,21 @@ namespace PI_CLUB_DEPORTIVO.vistas
                 // Obtener la actividad desde la base de datos
                 Actividad actividad = actividadDao.ObtenerActividadPorNombre(nombreSeleccionado);
 
-                // Mostrar los datos en controles del formulario (ejemplo)
-                txtMonto.Text = actividad.Precio.ToString("F2");  // si tenés un TextBox para mostrar el precio
+                // Chequear cupo
+                if (actividad.Cupo > 1)
 
+                {
+                    // Mostrar los datos en monto del formulario
+                    txtMonto.Text = actividad.Precio.ToString("F2");
+                    btnRegistrar.Enabled = true;
+                    // Restar cupo
+                    actividadDao.DescontarCupo(actividad.Id);
+                }
+                else
+                {
+                    MessageBox.Show("Actividad sin cupo seleccione otra opción");
+                    btnRegistrar.Enabled = false;
+                }
             }
             catch (Exception ex)
             {
