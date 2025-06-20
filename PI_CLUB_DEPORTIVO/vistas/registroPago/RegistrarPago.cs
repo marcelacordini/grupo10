@@ -14,8 +14,10 @@ namespace PI_CLUB_DEPORTIVO.vistas
         public RegistrarPago()
         {
             InitializeComponent();
+            EstiloTitulo(label1);
         }
 
+        private int tipoPagoSeleccionado;
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             {
@@ -41,17 +43,20 @@ namespace PI_CLUB_DEPORTIVO.vistas
                             lblActividad.Visible = false;
                             dateTimePicker2.Visible = true;
                             lblMonto.Text = "Monto Cuota";
+                            tipoPagoSeleccionado = 1;
 
 
                         }
                         else
                         {
+                            lblMonto.Text = "Monto";
                             cmbActividad.Enabled = true;
                             lblActividad.Visible = true;
                             cmbActividad.Visible = true;
                             lblFechaVto.Visible = false;
                             dateTimePicker2.Visible = false;
                             lblActividad.Text = "Actividad";
+                            tipoPagoSeleccionado = 2;
                         }
                     }
                     else
@@ -66,7 +71,7 @@ namespace PI_CLUB_DEPORTIVO.vistas
             }
         }
 
-        private int tipoPagoSeleccionado;
+
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtMonto.Text))
@@ -97,7 +102,7 @@ namespace PI_CLUB_DEPORTIVO.vistas
             {
                 PagoDao pagoDao = new PagoDao();
 
-                if (lblActividad.Text == "Cuota")
+                if (tipoPagoSeleccionado == 1)
                 {
                     bool exito = pagoDao.RegistrarPagoCuota(
                         int.Parse(txtClienteID.Text),
@@ -251,6 +256,18 @@ namespace PI_CLUB_DEPORTIVO.vistas
 
             this.Hide();
 
+        }
+
+        private void RegistrarPago_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            BackToMenu(this);
+            
         }
     }
 }

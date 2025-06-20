@@ -48,6 +48,7 @@
             dateTimePicker2 = new DateTimePicker();
             btnComprobante = new Button();
             label1 = new Label();
+            button1 = new Button();
             SuspendLayout();
             // 
             // txtClienteID
@@ -257,10 +258,21 @@
             label1.TabIndex = 23;
             label1.Text = "REGISTRO DE PAGO";
             // 
+            // button1
+            // 
+            button1.Location = new Point(75, 81);
+            button1.Name = "button1";
+            button1.Size = new Size(146, 33);
+            button1.TabIndex = 24;
+            button1.Text = "VOLVER";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // RegistrarPago
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
             ClientSize = new Size(1029, 676);
+            Controls.Add(button1);
             Controls.Add(label1);
             Controls.Add(btnComprobante);
             Controls.Add(dateTimePicker2);
@@ -283,6 +295,7 @@
             Controls.Add(btnBuscar);
             Controls.Add(txtClienteID);
             Name = "RegistrarPago";
+            Load += RegistrarPago_Load;
             Controls.SetChildIndex(txtClienteID, 0);
             Controls.SetChildIndex(btnBuscar, 0);
             Controls.SetChildIndex(btnLimpiarBuscar, 0);
@@ -304,6 +317,7 @@
             Controls.SetChildIndex(dateTimePicker2, 0);
             Controls.SetChildIndex(btnComprobante, 0);
             Controls.SetChildIndex(label1, 0);
+            Controls.SetChildIndex(button1, 0);
             ResumeLayout(false);
             PerformLayout();
             // 
@@ -333,5 +347,6 @@
         private DateTimePicker dateTimePicker2;
         private Button btnComprobante;
         private Label label1;
+        private Button button1;
     }
 }
