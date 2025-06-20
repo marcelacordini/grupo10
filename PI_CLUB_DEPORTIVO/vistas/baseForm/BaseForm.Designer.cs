@@ -49,6 +49,7 @@
             panel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             panel.Size = new Size(800, 40);
             panel.TabIndex = 1;
+            panel.MouseDown += PanelHeader_MouseDown;
             // 
             // lblTituloHeader
             // 

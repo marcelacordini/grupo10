@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PI_CLUB_DEPORTIVO.vistas.baseForm;
+using PI_CLUB_DEPORTIVO.vistas.listaSociosInactivos;
 using PI_CLUB_DEPORTIVO.vistas.registroCliente;
 
 namespace PI_CLUB_DEPORTIVO.vistas
@@ -57,7 +58,14 @@ namespace PI_CLUB_DEPORTIVO.vistas
 
         private void btnSociosConCuotaVencida_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("VENTANA DE SOCIOSCUENTAVENCIDA", "Info", MessageBoxButtons.OK);
+            // Crear una instancia del formulario socioInactivo
+            socioInactivo formularioSocios = new socioInactivo();
+
+            // Mostrar el formulario
+            formularioSocios.Show();
+
+            // Ocultar el formulario actual (opcional)
+            this.Hide();
         }
     }
 }
