@@ -53,16 +53,18 @@
             // 
             // txtClienteID
             // 
-            txtClienteID.Location = new Point(75, 166);
+            txtClienteID.Location = new Point(58, 123);
+            txtClienteID.Margin = new Padding(2, 2, 2, 2);
             txtClienteID.Name = "txtClienteID";
-            txtClienteID.Size = new Size(285, 30);
+            txtClienteID.Size = new Size(287, 25);
             txtClienteID.TabIndex = 2;
             // 
             // btnBuscar
             // 
-            btnBuscar.Location = new Point(491, 166);
+            btnBuscar.Location = new Point(420, 119);
+            btnBuscar.Margin = new Padding(2, 2, 2, 2);
             btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(178, 30);
+            btnBuscar.Size = new Size(138, 34);
             btnBuscar.TabIndex = 3;
             btnBuscar.Text = "BUSCAR";
             btnBuscar.UseVisualStyleBackColor = true;
@@ -70,9 +72,10 @@
             // 
             // btnLimpiarBuscar
             // 
-            btnLimpiarBuscar.Location = new Point(712, 166);
+            btnLimpiarBuscar.Location = new Point(616, 118);
+            btnLimpiarBuscar.Margin = new Padding(2, 2, 2, 2);
             btnLimpiarBuscar.Name = "btnLimpiarBuscar";
-            btnLimpiarBuscar.Size = new Size(178, 30);
+            btnLimpiarBuscar.Size = new Size(138, 35);
             btnLimpiarBuscar.TabIndex = 4;
             btnLimpiarBuscar.Text = "LIMPIAR";
             btnLimpiarBuscar.UseVisualStyleBackColor = true;
@@ -82,26 +85,29 @@
             // 
             lblCliente.AutoSize = true;
             lblCliente.ForeColor = SystemColors.ControlLight;
-            lblCliente.Location = new Point(75, 130);
+            lblCliente.Location = new Point(58, 96);
+            lblCliente.Margin = new Padding(2, 0, 2, 0);
             lblCliente.Name = "lblCliente";
-            lblCliente.Size = new Size(85, 23);
+            lblCliente.Size = new Size(69, 19);
             lblCliente.TabIndex = 5;
             lblCliente.Text = "Cliente ID";
             // 
             // txtMonto
             // 
-            txtMonto.Location = new Point(620, 371);
+            txtMonto.Location = new Point(482, 274);
+            txtMonto.Margin = new Padding(2, 2, 2, 2);
             txtMonto.Name = "txtMonto";
-            txtMonto.Size = new Size(213, 30);
+            txtMonto.Size = new Size(167, 25);
             txtMonto.TabIndex = 8;
             // 
             // cmbFormaPago
             // 
             cmbFormaPago.FormattingEnabled = true;
             cmbFormaPago.Items.AddRange(new object[] { "Tarjeta", "Efectivo" });
-            cmbFormaPago.Location = new Point(164, 445);
+            cmbFormaPago.Location = new Point(128, 329);
+            cmbFormaPago.Margin = new Padding(2, 2, 2, 2);
             cmbFormaPago.Name = "cmbFormaPago";
-            cmbFormaPago.Size = new Size(190, 31);
+            cmbFormaPago.Size = new Size(149, 25);
             cmbFormaPago.TabIndex = 9;
             cmbFormaPago.SelectedIndexChanged += cmbFormaPago_SelectedIndexChanged;
             // 
@@ -110,16 +116,18 @@
             cmbPromocion.AutoCompleteCustomSource.AddRange(new string[] { "1", "3", "6" });
             cmbPromocion.FormattingEnabled = true;
             cmbPromocion.Items.AddRange(new object[] { "1", "3", "6" });
-            cmbPromocion.Location = new Point(620, 440);
+            cmbPromocion.Location = new Point(482, 325);
+            cmbPromocion.Margin = new Padding(2, 2, 2, 2);
             cmbPromocion.Name = "cmbPromocion";
-            cmbPromocion.Size = new Size(213, 31);
+            cmbPromocion.Size = new Size(167, 25);
             cmbPromocion.TabIndex = 10;
             // 
             // btnRegistrar
             // 
-            btnRegistrar.Location = new Point(84, 534);
+            btnRegistrar.Location = new Point(65, 395);
+            btnRegistrar.Margin = new Padding(2, 2, 2, 2);
             btnRegistrar.Name = "btnRegistrar";
-            btnRegistrar.Size = new Size(196, 43);
+            btnRegistrar.Size = new Size(152, 32);
             btnRegistrar.TabIndex = 11;
             btnRegistrar.Text = "REGISTRAR PAGO";
             btnRegistrar.UseVisualStyleBackColor = true;
@@ -127,9 +135,10 @@
             // 
             // btnLimpiar
             // 
-            btnLimpiar.Location = new Point(381, 534);
+            btnLimpiar.Location = new Point(296, 395);
+            btnLimpiar.Margin = new Padding(2, 2, 2, 2);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(214, 42);
+            btnLimpiar.Size = new Size(166, 31);
             btnLimpiar.TabIndex = 12;
             btnLimpiar.Text = "LIMPIAR";
             btnLimpiar.UseVisualStyleBackColor = true;
@@ -139,9 +148,10 @@
             // 
             lblFecha.AutoSize = true;
             lblFecha.ForeColor = SystemColors.ControlLight;
-            lblFecha.Location = new Point(75, 280);
+            lblFecha.Location = new Point(58, 207);
+            lblFecha.Margin = new Padding(2, 0, 2, 0);
             lblFecha.Name = "lblFecha";
-            lblFecha.Size = new Size(54, 23);
+            lblFecha.Size = new Size(44, 19);
             lblFecha.TabIndex = 13;
             lblFecha.Text = "Fecha";
             // 
@@ -149,9 +159,10 @@
             // 
             lblFechaVto.AutoSize = true;
             lblFechaVto.ForeColor = SystemColors.ControlLight;
-            lblFechaVto.Location = new Point(478, 279);
+            lblFechaVto.Location = new Point(372, 206);
+            lblFechaVto.Margin = new Padding(2, 0, 2, 0);
             lblFechaVto.Name = "lblFechaVto";
-            lblFechaVto.Size = new Size(154, 23);
+            lblFechaVto.Size = new Size(123, 19);
             lblFechaVto.TabIndex = 14;
             lblFechaVto.Text = "Fecha Vencimiento";
             // 
@@ -159,9 +170,10 @@
             // 
             lblMonto.AutoSize = true;
             lblMonto.ForeColor = SystemColors.ControlLight;
-            lblMonto.Location = new Point(491, 374);
+            lblMonto.Location = new Point(382, 276);
+            lblMonto.Margin = new Padding(2, 0, 2, 0);
             lblMonto.Name = "lblMonto";
-            lblMonto.Size = new Size(61, 23);
+            lblMonto.Size = new Size(51, 19);
             lblMonto.TabIndex = 15;
             lblMonto.Text = "Monto";
             // 
@@ -170,9 +182,10 @@
             cmbActividad.AutoCompleteCustomSource.AddRange(new string[] { "Zumba", "Yoga", "Crossfit", "Funcional", "Pilates", "Spinning", "Boxeo" });
             cmbActividad.FormattingEnabled = true;
             cmbActividad.Items.AddRange(new object[] { "Zumba", "Yoga", "Crossfit", "Funcional", "Pilates", "Spinning", "Boxeo" });
-            cmbActividad.Location = new Point(164, 371);
+            cmbActividad.Location = new Point(128, 274);
+            cmbActividad.Margin = new Padding(2, 2, 2, 2);
             cmbActividad.Name = "cmbActividad";
-            cmbActividad.Size = new Size(190, 31);
+            cmbActividad.Size = new Size(149, 25);
             cmbActividad.TabIndex = 16;
             cmbActividad.SelectedValueChanged += cmbActividad_SelectedValueChanged;
             // 
@@ -180,9 +193,10 @@
             // 
             lblActividad.AutoSize = true;
             lblActividad.ForeColor = SystemColors.ControlLight;
-            lblActividad.Location = new Point(75, 379);
+            lblActividad.Location = new Point(58, 280);
+            lblActividad.Margin = new Padding(2, 0, 2, 0);
             lblActividad.Name = "lblActividad";
-            lblActividad.Size = new Size(80, 23);
+            lblActividad.Size = new Size(65, 19);
             lblActividad.TabIndex = 17;
             lblActividad.Text = "Actividad";
             // 
@@ -190,9 +204,10 @@
             // 
             lblForma.AutoSize = true;
             lblForma.ForeColor = SystemColors.ControlLight;
-            lblForma.Location = new Point(75, 448);
+            lblForma.Location = new Point(58, 331);
+            lblForma.Margin = new Padding(2, 0, 2, 0);
             lblForma.Name = "lblForma";
-            lblForma.Size = new Size(58, 23);
+            lblForma.Size = new Size(48, 19);
             lblForma.TabIndex = 18;
             lblForma.Text = "Forma";
             // 
@@ -200,9 +215,10 @@
             // 
             lblPromocion.AutoSize = true;
             lblPromocion.ForeColor = SystemColors.ControlLight;
-            lblPromocion.Location = new Point(491, 445);
+            lblPromocion.Location = new Point(382, 329);
+            lblPromocion.Margin = new Padding(2, 0, 2, 0);
             lblPromocion.Name = "lblPromocion";
-            lblPromocion.Size = new Size(93, 23);
+            lblPromocion.Size = new Size(75, 19);
             lblPromocion.TabIndex = 19;
             lblPromocion.Text = "Promocion";
             // 
@@ -211,36 +227,40 @@
             lblClienteResultado.AutoSize = true;
             lblClienteResultado.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblClienteResultado.ForeColor = SystemColors.Control;
-            lblClienteResultado.Location = new Point(78, 221);
+            lblClienteResultado.Location = new Point(61, 163);
+            lblClienteResultado.Margin = new Padding(2, 0, 2, 0);
             lblClienteResultado.Name = "lblClienteResultado";
-            lblClienteResultado.Size = new Size(172, 25);
+            lblClienteResultado.Size = new Size(141, 20);
             lblClienteResultado.TabIndex = 20;
             lblClienteResultado.Text = "Datos Encontrados";
             // 
             // dateTimePicker1
             // 
             dateTimePicker1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dateTimePicker1.Location = new Point(135, 279);
+            dateTimePicker1.Location = new Point(105, 206);
+            dateTimePicker1.Margin = new Padding(2, 2, 2, 2);
             dateTimePicker1.MaxDate = new DateTime(2100, 12, 31, 0, 0, 0, 0);
             dateTimePicker1.MinDate = new DateTime(2025, 1, 1, 0, 0, 0, 0);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(308, 30);
+            dateTimePicker1.Size = new Size(240, 26);
             dateTimePicker1.TabIndex = 21;
             dateTimePicker1.Value = new DateTime(2025, 6, 17, 0, 0, 0, 0);
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Location = new Point(638, 274);
+            dateTimePicker2.Location = new Point(496, 203);
+            dateTimePicker2.Margin = new Padding(2, 2, 2, 2);
             dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(331, 30);
+            dateTimePicker2.Size = new Size(258, 25);
             dateTimePicker2.TabIndex = 2;
             // 
             // btnComprobante
             // 
-            btnComprobante.Location = new Point(699, 535);
+            btnComprobante.Location = new Point(544, 395);
+            btnComprobante.Margin = new Padding(2, 2, 2, 2);
             btnComprobante.Name = "btnComprobante";
-            btnComprobante.Size = new Size(214, 42);
+            btnComprobante.Size = new Size(166, 31);
             btnComprobante.TabIndex = 22;
             btnComprobante.Text = "COMPROBANTE";
             btnComprobante.UseVisualStyleBackColor = true;
@@ -252,17 +272,19 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.Control;
-            label1.Location = new Point(426, 70);
+            label1.Location = new Point(326, 60);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(183, 25);
+            label1.Size = new Size(149, 20);
             label1.TabIndex = 23;
             label1.Text = "REGISTRO DE PAGO";
             // 
             // button1
             // 
-            button1.Location = new Point(75, 81);
+            button1.Location = new Point(58, 52);
+            button1.Margin = new Padding(2, 2, 2, 2);
             button1.Name = "button1";
-            button1.Size = new Size(146, 33);
+            button1.Size = new Size(114, 34);
             button1.TabIndex = 24;
             button1.Text = "VOLVER";
             button1.UseVisualStyleBackColor = true;
@@ -270,8 +292,8 @@
             // 
             // RegistrarPago
             // 
-            AutoScaleDimensions = new SizeF(9F, 23F);
-            ClientSize = new Size(1029, 676);
+            AutoScaleDimensions = new SizeF(7F, 17F);
+            ClientSize = new Size(800, 500);
             Controls.Add(button1);
             Controls.Add(label1);
             Controls.Add(btnComprobante);
@@ -294,6 +316,7 @@
             Controls.Add(btnLimpiarBuscar);
             Controls.Add(btnBuscar);
             Controls.Add(txtClienteID);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "RegistrarPago";
             Load += RegistrarPago_Load;
             Controls.SetChildIndex(txtClienteID, 0);
