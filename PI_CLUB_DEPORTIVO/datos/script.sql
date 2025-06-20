@@ -235,7 +235,7 @@ DELIMITER //
 CREATE PROCEDURE obtener_socios_inactivos_vencidos()
 BEGIN
     SELECT 
-        -- c.id AS id_cliente,
+        c.id AS 'ID',
     	Concat(c.nombre, ' ', c.apellido) AS 'Cliente',
         -- c.nombre AS 'Nombre', 
         -- c.apellido AS 'Apellido',
