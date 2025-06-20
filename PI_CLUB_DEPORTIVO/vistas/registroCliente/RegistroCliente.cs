@@ -93,7 +93,10 @@ namespace PI_CLUB_DEPORTIVO.vistas.registroCliente
                 ClienteDao clienteDao = new ClienteDao();
                 string? respuesta = clienteDao.NuevoCliente(nuevoCliente);
 
-                PopUpConfirmacion.MostrarPopUp(respuesta, TipoClienteConst.SOCIO);
+                PopUpConfirmacion.MostrarPopUp(respuesta, TipoClienteConst.SOCIO, nombre + " " + apellido);
+
+
+                // PopUpConfirmacion.MostrarPopUp(respuesta, TipoClienteConst.SOCIO);
 
                 LimpiarCampos(sender, e);
             }
@@ -106,7 +109,10 @@ namespace PI_CLUB_DEPORTIVO.vistas.registroCliente
                 ClienteDao clienteDao = new ClienteDao();
                 string? respuesta = clienteDao.NuevoCliente(nuevoCliente);
 
-                PopUpConfirmacion.MostrarPopUp(respuesta, TipoClienteConst.NO_SOCIO);
+                //PopUpConfirmacion.MostrarPopUp(respuesta, TipoClienteConst.NO_SOCIO);
+
+                PopUpConfirmacion.MostrarPopUp(respuesta, TipoClienteConst.SOCIO, nombre + " " + apellido);
+
 
                 LimpiarCampos(sender, e);
             }
