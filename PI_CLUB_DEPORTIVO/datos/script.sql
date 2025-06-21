@@ -5,11 +5,11 @@ USE Proyecto;
 
 CREATE TABLE usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100),
-    clave VARCHAR(100)
+    nombre VARCHAR(100) NOT NULL,
+    clave VARCHAR(100) NOT NULL
 );
 
-INSERT INTO usuario (nombre, clave) VALUES ('Emma', '12345');
+INSERT INTO usuario (nombre, clave) VALUES ('emma', '12345');
 
 CREATE TABLE cliente (
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -26,16 +26,16 @@ CREATE TABLE cliente (
 
 -- Insertar datos
 INSERT INTO cliente (nombre, apellido, dni, correo, telefono, domicilio, fechaAlta, aptoFisico, tipoCliente) VALUES
-('Ana', 'Pérez', 32165478, 'ana.perez@email.com', '11-5555-1234', 'Calle Falsa 123, Ciudad Autónoma de Buenos Aires', '2024-01-15', TRUE, 'socio'),
-('Carlos', 'López', 25879631, 'carlos.lopez@otrocorreo.net', '351-6666-7890', 'Avenida Principal 456, Córdoba', '2024-03-20', TRUE, 'socio'),
-('Martina', 'Gómez', 41236987, 'martina.gomez@mail.org', '261-7777-0123', 'Pasaje Central 789, Mendoza', '2024-05-10', FALSE, 'no_socio'),
-('Juan', 'Rodríguez', 18963254, 'juan.rodriguez@miemail.com', '11-4444-5678', 'Ruta Provincial 10, Provincia de Buenos Aires', '2024-07-01', TRUE, 'socio'),
-('Sofía', 'Fernández', 38741259, 'sofia.fernandez@suemail.com', '381-8888-9012', 'Barrio Nuevo 321, Tucumán', '2024-09-25', TRUE, 'socio'),
-('Pedro', 'González', 29514782, 'pedro.gonzalez@correo.com', '341-9999-2345', 'Urquiza 654, Rosario', '2024-11-30', FALSE, 'no_socio'),
-('Laura', 'Díaz', 45698712, 'laura.diaz@otro.net', '223-1111-4567', 'Calle 9 de Julio 159, Mar del Plata', '2025-02-10', TRUE, 'socio'),
-('Manuel', 'Sánchez', 21369852, 'manuel.sanchez@mail.com', '379-2222-7890', 'Rivadavia 876, Corrientes', '2025-04-05', TRUE, 'socio'),
-('Agustina', 'Romero', 35789641, 'agustina.romero@mi.org', '299-3333-0123', 'San Martín 421, Neuquén', '2025-05-12', TRUE, 'socio'),
-('Santiago', 'Medina', 48215796, 'santiago.medina@su.com', '336-4444-5678', 'Belgrano 987, San Nicolás', '2025-05-14', TRUE, 'no_socio');
+('Ana', 'Pérez', 32165478, 'ana.perez@email.com', '1155551234', 'Calle Falsa 123, Ciudad Autónoma de Buenos Aires', '2024-01-15', TRUE, 'socio'),
+('Carlos', 'López', 25879631, 'carlos.lopez@otrocorreo.net', '35166667890', 'Avenida Principal 456, Córdoba', '2024-03-20', TRUE, 'socio'),
+('Martina', 'Gómez', 41236987, 'martina.gomez@mail.org', '26177770123', 'Pasaje Central 789, Mendoza', '2024-05-10', FALSE, 'no_socio'),
+('Juan', 'Rodríguez', 18963254, 'juan.rodriguez@miemail.com', '1144445678', 'Ruta Provincial 10, Provincia de Buenos Aires', '2024-07-01', TRUE, 'socio'),
+('Sofía', 'Fernández', 38741259, 'sofia.fernandez@suemail.com', '38188889012', 'Barrio Nuevo 321, Tucumán', '2024-09-25', TRUE, 'socio'),
+('Pedro', 'González', 29514782, 'pedro.gonzalez@correo.com', '34199992345', 'Urquiza 654, Rosario', '2024-11-30', FALSE, 'no_socio'),
+('Laura', 'Díaz', 45698712, 'laura.diaz@otro.net', '22311114567', 'Calle 9 de Julio 159, Mar del Plata', '2025-02-10', TRUE, 'socio'),
+('Manuel', 'Sánchez', 21369852, 'manuel.sanchez@mail.com', '37922227890', 'Rivadavia 876, Corrientes', '2025-04-05', TRUE, 'socio'),
+('Agustina', 'Romero', 35789641, 'agustina.romero@mi.org', '29933330123', 'San Martín 421, Neuquén', '2025-05-12', TRUE, 'socio'),
+('Santiago', 'Medina', 48215796, 'santiago.medina@su.com', '33644445678', 'Belgrano 987, San Nicolás', '2025-05-14', TRUE, 'no_socio');
 
 --crear tabla de socio
 CREATE TABLE socio (
@@ -71,16 +71,13 @@ CREATE TABLE cuota (
 
 -- Insertar datos de cuotas
 INSERT INTO cuota (cliente_id, fechaVencimiento, fechaPago, monto, formaPago, promocion, estado) VALUES
--- Cuotas pagadas antes del vencimiento
 (1, DATE_ADD(CURDATE(), INTERVAL 5 DAY), DATE_ADD(CURDATE(), INTERVAL 5 DAY), 1500.00, 'efectivo', 1, 'pagada'),
 (2, '2025-06-20', '2025-06-19', 2200.50, 'tarjeta', 2, 'pagada'),
 (4, '2025-06-25', '2025-06-23', 950.75, 'efectivo', 1, 'pagada'),
 (2, '2025-07-20', '2025-07-18', 2200.50, 'efectivo', 1, 'pagada'),
 (7, '2025-06-30', '2025-06-28', 1750.25, 'efectivo', 1, 'pagada'),
--- Cuotas pagadas el mismo día del vencimiento
 (3, '2025-06-10', '2025-06-10', 1800.00, 'efectivo', 1, 'pagada'),
 (6, '2025-06-05', '2025-06-05', 1250.00, 'tarjeta', 1, 'pagada'),
--- Cuotas pagadas después del vencimiento (con recargo)
 (1, '2025-07-15', '2025-07-16', 1500.00, 'tarjeta', 1, 'pagada'),
 (5, '2025-07-01', '2025-07-03', 3000.00, 'tarjeta', 3, 'pagada'),
 (8, '2025-07-05', '2025-07-06', 2500.00, 'tarjeta', 2, 'pagada');
@@ -91,19 +88,20 @@ INSERT INTO cuota (cliente_id, fechaVencimiento, fechaPago, monto, formaPago, pr
 CREATE TABLE IF NOT EXISTS actividad (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100),
-    precio FLOAT
+    precio FLOAT,
+	cupo INT
 );
 
 
 -- Insertando datos de  Actividades
 INSERT INTO actividad (nombre, precio) VALUES
-('Zumba', 1200.00),
-('Yoga', 1500.00),
-('Crossfit', 2000.00),
-('Funcional', 1800.00),
-('Pilates', 1600.00),
-('Spinning', 1700.00),
-('Boxeo', 1900.00);
+('Zumba', 1200.00,0),
+('Yoga', 1500.00,20),
+('Crossfit', 2000.00,20),
+('Funcional', 1800.00,20),
+('Pilates', 1600.00,20),
+('Spinning', 1700.00,20),
+('Boxeo', 1900.00,20);
 
 
 -- CREAR TABLA DE PAGOS DE ACTIVIDAD (NO SOCIOS)
@@ -159,17 +157,15 @@ delimiter //
 create procedure IngresoLogin(in Usu varchar(100), in Pass varchar(100))
 
 begin
-  
-
-  select id, nombre 
-  from usuario 
-  where nombre = Usu and clave = Pass;
+	select id, nombre 
+	from usuario 
+	where nombre = Usu and clave = Pass;
 
 end
 //
 
 -- TE TIENE QUE TRAER A EMMA
-call IngresoLogin('Emma', '12345')//
+call IngresoLogin('emma', '12345')//
 
 
 -- STORE PROCEDURE PARA EL REGISTRO DE CLIENTE
@@ -188,35 +184,35 @@ BEGIN
 	declare filas int default 0;
 	declare existe int default 0;
     
-     set filas = (select count(*) from cliente);
-     if filas = 0 then
+	set filas = (select count(*) from cliente);
+	if filas = 0 then
 		set filas = 452; /* consideramos a este numero como el primer numero de cliente */
-     else
-     /* -------------------------------------------------------------------------------
+	else
+		/* -------------------------------------------------------------------------------
 		buscamos el ultimo numero de cliente almacenado para sumarle una unidad y
 		considerarla como PRIMARY KEY de la tabla
-   ___________________________________________________________________________ */
+		___________________________________________________________________________ */
 		set filas = (select max(id) + 1 from cliente);
 		
 		/* ---------------------------------------------------------
 			para saber si ya esta almacenado el cliente
 		------------------------------------------------------- */	
 		set existe = (select count(*) from cliente where dni = Doc);
-     end if;
+	end if;
 	 
-	  if existe = 0 then	 
-		 insert into cliente values(filas,Nom,Ape,Doc,Cor,Tel,Dom,FAlta,AFis,Tip);
+	if existe = 0 then	 
+		insert into cliente values(filas,Nom,Ape,Doc,Cor,Tel,Dom,FAlta,AFis,Tip);
 	  
-	  		IF Tip = 'socio' THEN
-	  			INSERT INTO socio (cliente_id, fechaVencimiento, estado) values(filas, DATE_ADD(CURDATE(), INTERVAL 30 DAY), 'activo');
-	  		END IF;
+		IF Tip = 'socio' THEN
+	  		INSERT INTO socio (cliente_id, fechaVencimiento, estado) values(filas, DATE_ADD(CURDATE(), INTERVAL 30 DAY), 'activo');
+		END IF;
 	  		
-	  		COMMIT;
+		COMMIT;
 	  
-		 set rta  = filas;
-	  else
-		 set rta = existe;
-      end if;
+		set rta  = filas;
+	else
+		set rta = existe;
+	end if;
 END
 //
 -- LLAMADO AL STORE ANTERIOR
@@ -237,8 +233,6 @@ BEGIN
     SELECT 
         c.id AS 'ID',
     	Concat(c.nombre, ' ', c.apellido) AS 'Cliente',
-        -- c.nombre AS 'Nombre', 
-        -- c.apellido AS 'Apellido',
         CASE 
             WHEN q.estado = 'vencida' AND q.fechaPago IS NULL THEN 'inactivo'
             ELSE 'activo'
@@ -247,7 +241,7 @@ BEGIN
         c.correo AS 'Correo',
         c.telefono AS 'Teléfono', 
         q.fechaVencimiento AS 'Fecha de vencimiento'
-        -- DATEDIFF(CURDATE(), q.fechaVencimiento) AS dias_vencidos_cuota
+        DATEDIFF(CURDATE(), q.fechaVencimiento) AS 'Días desde el venc.'
     FROM 
         cliente c
     JOIN 
